@@ -124,7 +124,7 @@ public class Inicio extends javax.swing.JFrame {
 
     private void butaoFuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_butaoFuncionariosMouseClicked
         // TODO add your handling code here:
-        
+        new Funcionarios().setVisible(true);
     }//GEN-LAST:event_butaoFuncionariosMouseClicked
 
     /**
