@@ -5,6 +5,8 @@
 package Telas;
 
 import javax.swing.JOptionPane;
+import dao.ConexaoBanco;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
 /**
  *
@@ -273,12 +275,12 @@ public class Estoque extends javax.swing.JFrame {
     }//GEN-LAST:event_butaoLimparActionPerformed
 
     private void testarSQLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_testarSQLMouseClicked
-//        try{
-//            new dao.ConexaoBanco().conectar();
-//            JOptionPane.showMessageDialog(null, "Banco de dados conectado");
-//        } catch (Exception ex){
-//            JOptionPane.showMessageDialog(null,"Ocorreu um erro inesperado: " + ex.getMessage(), "Erro!",ERROR_MESSAGE);
-//        }
+        try{
+            new dao.ConexaoBanco().conectar();
+            JOptionPane.showMessageDialog(null, "Banco de dados conectado");
+        } catch (Exception ex){
+           JOptionPane.showMessageDialog(null,"Ocorreu um erro inesperado: " + ex.getMessage(), "Erro!",ERROR_MESSAGE);
+        }
 
     }//GEN-LAST:event_testarSQLMouseClicked
 
