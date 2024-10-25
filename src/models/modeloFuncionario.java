@@ -26,7 +26,7 @@ public class modeloFuncionario {
         return idFuncionario;
     }
     
-    public void setIdFunc(){
+    public void setIdFunc(int idFuncionario){
         this.idFuncionario = idFuncionario;
     }
     
@@ -34,7 +34,7 @@ public class modeloFuncionario {
         return nomeFuncionario;
     }
     
-    public void setNomeFunc(){
+    public void setNomeFunc(String nomeFuncionario){
      this.nomeFuncionario = nomeFuncionario;
     }
     

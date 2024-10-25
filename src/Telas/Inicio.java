@@ -36,7 +36,7 @@ public class Inicio extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel1.setText("Bar Aurora");
+        jLabel1.setText("Bar Lunar");
 
         butaoCaixa.setText("Caixa");
         butaoCaixa.addActionListener(new java.awt.event.ActionListener() {
