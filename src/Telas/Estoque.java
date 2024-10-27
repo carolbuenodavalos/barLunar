@@ -6,14 +6,19 @@ package Telas;
 
 import javax.swing.JOptionPane;
 import dao.ConexaoBanco;
+import dao.EstoqueDao;
+import java.util.ArrayList;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+import javax.swing.table.DefaultTableModel;
+import models.modeloEstoque;
 
 /**
  *
  * @author marcu
  */
 public class Estoque extends javax.swing.JFrame {
-
+    int contador=0;
     /**
      * Creates new form Estoque
      */
@@ -47,8 +52,14 @@ public class Estoque extends javax.swing.JFrame {
         CampoDesc = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        butaoExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         butaoCadastrar.setBackground(new java.awt.Color(153, 153, 153));
         butaoCadastrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -109,8 +120,28 @@ public class Estoque extends javax.swing.JFrame {
             new String [] {
                 "ID", "Nome do Produto", "Preço", "Quantidade", "Categoria"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TabelaEstoque.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabelaEstoqueMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TabelaEstoque);
+        if (TabelaEstoque.getColumnModel().getColumnCount() > 0) {
+            TabelaEstoque.getColumnModel().getColumn(0).setResizable(false);
+            TabelaEstoque.getColumnModel().getColumn(1).setResizable(false);
+            TabelaEstoque.getColumnModel().getColumn(2).setResizable(false);
+            TabelaEstoque.getColumnModel().getColumn(3).setResizable(false);
+            TabelaEstoque.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         testarSQL.setBackground(new java.awt.Color(153, 153, 153));
         testarSQL.setText("testar SQL");
@@ -137,6 +168,7 @@ public class Estoque extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel5.setText("Estoque");
 
+        jButton1.setBackground(new java.awt.Color(153, 153, 153));
         jButton1.setText("Mesa");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -146,6 +178,14 @@ public class Estoque extends javax.swing.JFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        butaoExcluir.setBackground(new java.awt.Color(153, 153, 153));
+        butaoExcluir.setText("Excluir");
+        butaoExcluir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                butaoExcluirMouseClicked(evt);
             }
         });
 
@@ -182,7 +222,9 @@ public class Estoque extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(testarSQL)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(butaoLimpar))
+                        .addComponent(butaoLimpar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(butaoExcluir))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(36, 36, 36))
@@ -221,7 +263,8 @@ public class Estoque extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(butaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(testarSQL)
-                    .addComponent(butaoLimpar))
+                    .addComponent(butaoLimpar)
+                    .addComponent(butaoExcluir))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
@@ -232,17 +275,48 @@ public class Estoque extends javax.swing.JFrame {
 
     private void butaoCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_butaoCadastrarMouseClicked
         // TODO add your handling code here:
-        String vSN = "";
-        if(this.butaoLimpar.isSelected()){
-            vSN = "SIM";
-        } else{
-            vSN = "NÃO";
-        }
-        JOptionPane.showMessageDialog(null, "Cadastro efetuado:"+ "\n" +
-            "Nome: " + CampoNome.getText() + "\n" +
-            "Preço: " + CampoPreco.getText() + "\n" +
-            "Quantidade: " + CampoQuantidade.getText() + "\n" +     
-            "Categoria: " + CampoCategoria.getSelectedItem() + "\n");
+       if((CampoNome.getText().trim().isEmpty()) || ((CampoQuantidade.getText().trim().isEmpty())|| CampoPreco.getText().trim().isEmpty()|| (CampoDesc.getText().trim().isEmpty()))){
+                   JOptionPane.showMessageDialog(null, "Nenhum dado idendificado");
+                   CampoNome.requestFocus();
+       }else{
+            if (contador == 0) {            
+                try{    
+                   modeloEstoque cadastroP = new modeloEstoque();
+
+                  cadastroP.setNomeProd(CampoNome.getText());
+                  cadastroP.setPreco(Float.parseFloat(CampoPreco.getText()));
+                  cadastroP.setQtdProd(Integer.parseInt(CampoQuantidade.getText()));   
+                  cadastroP.setDescProduto(CampoDesc.getText());     
+                  EstoqueDao cadastroPDao = new EstoqueDao();
+                  cadastroPDao.inserir(cadastroP); 
+                  limparTabela();
+                  atualizaTabela(cadastroPDao);
+                  limparCampos();
+                }
+                catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado:\n" + ex.getMessage(), "ERRO!", ERROR_MESSAGE);
+                } 
+            }else{
+                modeloEstoque cadastroP = new modeloEstoque();
+                cadastroP.setNomeProd(CampoNome.getText());
+                cadastroP.setPreco(Float.parseFloat(CampoPreco.getText()));
+                cadastroP.setQtdProd(Integer.parseInt(CampoQuantidade.getText()));  
+                cadastroP.setDescProduto(CampoDesc.getText());
+
+                EstoqueDao cadastroPDao = new EstoqueDao();
+                cadastroPDao.alterar(cadastroP);
+                limparTabela();
+                atualizaTabela(cadastroPDao);
+                JOptionPane.showMessageDialog(null, "Cadastro alterado com sucesso!", "", INFORMATION_MESSAGE);
+                CampoNome.requestFocus();
+                limparCampos();
+                
+                contador = 0;
+                TabelaEstoque.setVisible(true);
+                butaoCadastrar.setText("Cadastrar");                
+            }    
+
+       }
     }//GEN-LAST:event_butaoCadastrarMouseClicked
 
     private void butaoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butaoCadastrarActionPerformed
@@ -283,6 +357,42 @@ public class Estoque extends javax.swing.JFrame {
         // TODO add your handling code here:
         new telaMesa().setVisible(true);
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void butaoExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_butaoExcluirMouseClicked
+        if(TabelaEstoque.getSelectedRow() != -1){
+          int msgRetorno = JOptionPane.showConfirmDialog(null, 
+                                      "Confirme para remover o cadastro", 
+                                      "Confirmação", 
+                                      JOptionPane.YES_NO_OPTION); 
+                if (msgRetorno == JOptionPane.YES_OPTION) {
+                    DefaultTableModel tabelacadastro = (DefaultTableModel) TabelaEstoque.getModel();
+                    tabelacadastro.removeRow((TabelaEstoque.getSelectedRow()));  
+//                    EstoqueDao deleteitem = new EstoqueDao();
+//                    deleteitem.excluirID(CampoID.getText);
+                //Colocar um CampoID pra que possa excluir o Estoque, mas colocar o campo como inativo pra q nn de pra botar nada dentro
+                    limparCampos();
+                } 
+        }else{
+            JOptionPane.showMessageDialog(null, "Selecione um Cadastro para excluir!");
+        }
+    }//GEN-LAST:event_butaoExcluirMouseClicked
+
+    private void TabelaEstoqueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaEstoqueMouseClicked
+        if((TabelaEstoque.getSelectedRow() != -1) && (contador == 0) && (evt.getClickCount() == 2)){
+           CampoNome.setText(TabelaEstoque.getValueAt(TabelaEstoque.getSelectedRow(),0).toString());
+           CampoPreco.setText(TabelaEstoque.getValueAt(TabelaEstoque.getSelectedRow(),1).toString());
+           CampoQuantidade.setText(TabelaEstoque.getValueAt(TabelaEstoque.getSelectedRow(), 2).toString()); 
+           CampoDesc.setText(TabelaEstoque.getValueAt(TabelaEstoque.getSelectedRow(), 3).toString()); 
+           contador = 1;
+           TabelaEstoque.enable(false);
+           butaoCadastrar.setText("Alterar");
+        }   
+    }//GEN-LAST:event_TabelaEstoqueMouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        EstoqueDao estoqueAtt = new EstoqueDao();
+        atualizaTabela(estoqueAtt);
+    }//GEN-LAST:event_formWindowOpened
     
     private void limparCampos(){
         this.CampoNome.setText("");
@@ -291,6 +401,32 @@ public class Estoque extends javax.swing.JFrame {
         this.CampoDesc.setText("");  
         this.CampoCategoria.setSelectedIndex(-1);
         }
+    private void limparTabela(){
+        //percorre a tabela e exclui todas as linhas
+        while(TabelaEstoque.getRowCount() > 0){
+            DefaultTableModel dm = (DefaultTableModel) TabelaEstoque.getModel();
+            dm.getDataVector().removeAllElements();
+        }
+    }
+    
+    private void atualizaTabela(EstoqueDao cadastroPDao){
+        try{
+                    limparTabela();
+
+                    ArrayList<modeloEstoque> listaCadastros;
+                    listaCadastros = cadastroPDao.consultar();        
+                    DefaultTableModel modeloTabela = (DefaultTableModel) TabelaEstoque.getModel();
+
+                    for(modeloEstoque cadastroP : listaCadastros){
+                        modeloTabela.addRow(new String[]{Integer.toString(cadastroP.getIdProd()),cadastroP.getNomeProd(),Integer.toString((int) cadastroP.getPreco()),Integer.toString(cadastroP.getQtdProd()),cadastroP.getDescProduto()});
+                    }
+
+                }
+                catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado:\n" + ex.getMessage(), "ERRO!", ERROR_MESSAGE);
+                }
+     
+    }
     
     /**
      * @param args the command line arguments
@@ -376,6 +512,7 @@ public class Estoque extends javax.swing.JFrame {
     private javax.swing.JTextField CampoQuantidade;
     private javax.swing.JTable TabelaEstoque;
     private javax.swing.JButton butaoCadastrar;
+    private javax.swing.JButton butaoExcluir;
     private javax.swing.JButton butaoLimpar;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;

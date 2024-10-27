@@ -47,23 +47,23 @@ public class modeloEstoque {
      return preço;
  }
  
- public void setIdProd(){
+ public void setIdProd(int idProduto){
      this.idProduto = idProduto;
  }
  
- public void setNomeProd(){
+ public void setNomeProd(String nomeProduto){
      this.nomeProduto = nomeProduto;
  }
  
- public void setQtdProd(){
+ public void setQtdProd(int qtdProduto){
      this.qtdProduto = qtdProduto;
  }
  
- public void setDescProduto(){
+ public void setDescProduto(String descricaoProduto){
      this.descricaoProduto = descricaoProduto;
  }
  
-  public void setPreco(){
+  public void setPreco(float preço){
      this.preço = preço;
  }
  
