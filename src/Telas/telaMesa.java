@@ -4,7 +4,12 @@
  */
 package Telas;
 
+import dao.FuncionarioDao;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import javax.swing.table.DefaultTableModel;
+import models.modeloFuncionario;
 
 /**
  *
@@ -39,7 +44,7 @@ public class telaMesa extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         Tb01 = new javax.swing.JTable();
         botaoSalvar = new javax.swing.JButton();
-        campoFunc = new javax.swing.JComboBox<>();
+        CampoFunc = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -61,6 +66,11 @@ public class telaMesa extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         idMesa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,8 +135,8 @@ public class telaMesa extends javax.swing.JFrame {
             }
         });
 
-        campoFunc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Robo 1", "Robo 2", "Ze" }));
-        campoFunc.setSelectedIndex(-1);
+        CampoFunc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Robo 1", "Robo 2", "Ze" }));
+        CampoFunc.setSelectedIndex(-1);
 
         jLabel2.setText("Funcionario");
 
@@ -197,7 +207,7 @@ public class telaMesa extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(botaoSalvar)
-                            .addComponent(campoFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CampoFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -232,7 +242,7 @@ public class telaMesa extends javax.swing.JFrame {
                                 .addGap(45, 45, 45)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(campoFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(CampoFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(35, 35, 35)
                         .addComponent(jButton1)
                         .addGap(27, 27, 27)
@@ -254,13 +264,33 @@ public class telaMesa extends javax.swing.JFrame {
     private void botaoMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMesaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_botaoMesaActionPerformed
-      
+    
+    private void limparFunc(){
+        CampoFunc.removeAllItems();
+    }
+    
     private void limparCampos()
     {
         //limpando todos os campos textos
         this.botaoMesa.setSelectedIndex(-1);
         this.statusMesa.setSelectedIndex(-1);
-        this.campoFunc.setSelectedIndex(-1);
+        this.CampoFunc.setSelectedIndex(-1);
+    }
+    
+    private void atualizarFuncionario(FuncionarioDao DaoFunc){
+        try{
+              limparFunc();
+              ArrayList<modeloFuncionario> listarFunc;
+              listarFunc = DaoFunc.consultar();
+
+              for(modeloFuncionario func : listarFunc){
+                  CampoFunc.addItem(func.getNomeFunc());
+               }
+                    CampoFunc.setSelectedIndex(-1);
+                    }catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado:\n" + ex.getMessage(), "ERRO!", ERROR_MESSAGE);
+                    }
+                
     }
     
     private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
@@ -271,7 +301,7 @@ public class telaMesa extends javax.swing.JFrame {
           ENTÃO ELE VAI CADASTRAR E ADICIONAR NA TABELA*/
         
             DefaultTableModel tbcadastro = (DefaultTableModel) Tb01.getModel();
-            Object [] dados = {botaoMesa.getSelectedItem(), statusMesa.getSelectedItem(),campoFunc.getSelectedItem()};
+            Object [] dados = {botaoMesa.getSelectedItem(), statusMesa.getSelectedItem(),CampoFunc.getSelectedItem()};
             tbcadastro.addRow(dados);
             //limparCampos ();
         } else {
@@ -279,7 +309,7 @@ public class telaMesa extends javax.swing.JFrame {
             SELECIONADO ALTERAR O QUE TEM QUE SER ALTERADO E COLOCAR NA TABELA O CADASTRO JA ATUALIZADO*/
             Tb01.setValueAt(botaoMesa.getSelectedItem(), Tb01.getSelectedRow(), 0);
             Tb01.setValueAt(statusMesa.getSelectedItem(), Tb01.getSelectedRow(), 1);
-            Tb01.setValueAt(campoFunc.getSelectedItem(), Tb01.getSelectedRow(), 8);
+            Tb01.setValueAt(CampoFunc.getSelectedItem(), Tb01.getSelectedRow(), 8);
             
          limparCampos();
           vInsUpdate = 0;
@@ -322,6 +352,11 @@ public class telaMesa extends javax.swing.JFrame {
             this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        FuncionarioDao DaoFunc = new FuncionarioDao();
+        atualizarFuncionario(DaoFunc);
+    }//GEN-LAST:event_formWindowOpened
+
     /**
      * @param args the command line arguments
      */
@@ -358,10 +393,10 @@ public class telaMesa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> CampoFunc;
     private javax.swing.JTable Tb01;
     private javax.swing.JComboBox<String> botaoMesa;
     private javax.swing.JButton botaoSalvar;
-    private javax.swing.JComboBox<String> campoFunc;
     private javax.swing.JTextField idMesa;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

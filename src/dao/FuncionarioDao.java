@@ -45,6 +45,38 @@ public class FuncionarioDao implements DaoGenerica<modeloFuncionario>{
         }
     }
     
+    public ArrayList<modeloFuncionario> consultar() {
+         ArrayList<modeloFuncionario> comboboxfuncionario = new ArrayList<modeloFuncionario>();
+        String sql = "SELECT idFuncionario, nomeFuncionario FROM Funcionario ORDER BY nomeFuncionario";
+        
+        try
+        {
+            if(this.conexao.conectar())
+            {
+                PreparedStatement sentenca = this.conexao.getConnection().prepareStatement(sql);
+                
+                ResultSet resultadoSentenca = sentenca.executeQuery();
+
+                while(resultadoSentenca.next()) 
+                {
+                    modeloFuncionario funclist = new modeloFuncionario();
+                    funclist.setIdFunc(resultadoSentenca.getInt("idFuncionario"));
+                    funclist.setNomeFunc(resultadoSentenca.getString("nomeFuncionario"));
+
+                    comboboxfuncionario.add(funclist);
+                }
+
+                sentenca.close();
+                this.conexao.getConnection().close();
+            }
+            
+            return comboboxfuncionario;
+        }
+        catch(SQLException ex)
+        {
+           throw new RuntimeException(ex);
+        }
+    }
     
 //    public ArrayList<modeloFuncionario> dashboard() {
 //        ArrayList<modeloFuncionario> ListarDashBoard = new ArrayList<modeloFuncionario>();
@@ -85,11 +117,6 @@ public class FuncionarioDao implements DaoGenerica<modeloFuncionario>{
 
     @Override
     public void alterar(modeloFuncionario objt) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public ArrayList<modeloFuncionario> consultar() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
