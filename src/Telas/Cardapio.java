@@ -4,6 +4,13 @@
  */
 package Telas;
 
+import dao.EstoqueDao;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import javax.swing.table.DefaultTableModel;
+import models.modeloEstoque;
+
 /**
  *
  * @author marcu
@@ -30,12 +37,15 @@ public class Cardapio extends javax.swing.JFrame {
         Tequila = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TabelaCardapio = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -55,7 +65,7 @@ public class Cardapio extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TabelaCardapio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Teste", "5cao", null}
             },
@@ -71,11 +81,11 @@ public class Cardapio extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
+        jScrollPane1.setViewportView(TabelaCardapio);
+        if (TabelaCardapio.getColumnModel().getColumnCount() > 0) {
+            TabelaCardapio.getColumnModel().getColumn(0).setResizable(false);
+            TabelaCardapio.getColumnModel().getColumn(1).setResizable(false);
+            TabelaCardapio.getColumnModel().getColumn(2).setResizable(false);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -126,6 +136,18 @@ public class Cardapio extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowClosed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        EstoqueDao estoqueAtt = new EstoqueDao();
+        atualizaTabela(estoqueAtt);
+    }//GEN-LAST:event_formWindowOpened
+
+         private void limparTabela(){
+        //percorre a tabela e exclui todas as linhas
+        while(TabelaCardapio.getRowCount() > 0){
+            DefaultTableModel dm = (DefaultTableModel) TabelaCardapio.getModel();
+            dm.getDataVector().removeAllElements();
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -160,12 +182,31 @@ public class Cardapio extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void atualizaTabela(EstoqueDao cadastroPDao){
+        try{
+                    limparTabela();
+
+                    ArrayList<modeloEstoque> listaCadastros;
+                    listaCadastros = cadastroPDao.consultar();        
+                    DefaultTableModel modeloTabela = (DefaultTableModel) TabelaCardapio.getModel();
+
+                    for(modeloEstoque cadastroP : listaCadastros){
+                        modeloTabela.addRow(new String[]{Integer.toString(cadastroP.getIdProd()),cadastroP.getNomeProd(),Integer.toString((int) cadastroP.getPreco()),Integer.toString(cadastroP.getQtdProd()),cadastroP.getDescProduto()});
+                    }
+
+                }
+                catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado:\n" + ex.getMessage(), "ERRO!", ERROR_MESSAGE);
+                }
+     
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TabelaCardapio;
     private javax.swing.JLabel Tequila;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
