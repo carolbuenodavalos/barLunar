@@ -165,16 +165,24 @@ public class telaMesa extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {}
+
             },
             new String [] {
-
+                "Pedidos"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane3.setViewportView(jTable2);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/drinkmenu (1).png"))); // NOI18N
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -256,7 +264,6 @@ public class telaMesa extends javax.swing.JFrame {
                         .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
                                 .addComponent(jButton1)
                                 .addGap(13, 13, 13))
                             .addComponent(jLabel4))
