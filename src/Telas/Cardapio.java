@@ -192,7 +192,7 @@ public class Cardapio extends javax.swing.JFrame {
                     DefaultTableModel modeloTabela = (DefaultTableModel) TabelaCardapio.getModel();
 
                     for(modeloEstoque cadastroP : listaCadastros){
-                        modeloTabela.addRow(new String[]{Integer.toString(cadastroP.getIdProd()),cadastroP.getNomeProd(),Integer.toString((int) cadastroP.getPreco()),Integer.toString(cadastroP.getQtdProd()),cadastroP.getDescProduto()});
+                        modeloTabela.addRow(new String[]{cadastroP.getNomeProd(),Integer.toString((int) cadastroP.getPreco())});
                     }
 
                 }
