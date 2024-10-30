@@ -12,6 +12,7 @@ public class modeloEstoque {
     private int idProduto;
     private String nomeProduto;
     private int qtdProduto;
+    private int idCategoriaProduto;
     private String descricaoProduto;
     private float preço;
     
@@ -19,10 +20,11 @@ public class modeloEstoque {
  public modeloEstoque(){
  }
  
- public modeloEstoque(int idProduto, String nomeProduto, int qtdProduto, String descricaoProduto, float preço ){
+ public modeloEstoque(int idProduto, String nomeProduto, int qtdProduto, int idCategoriaProduto, String descricaoProduto, float preço ){
      this.idProduto = idProduto;
      this.nomeProduto = nomeProduto;
      this.qtdProduto = qtdProduto;
+     this.idCategoriaProduto = idCategoriaProduto;
      this.descricaoProduto = descricaoProduto;
      this.preço = preço;
 }
@@ -37,6 +39,10 @@ public class modeloEstoque {
  
  public int getQtdProd(){
      return qtdProduto; 
+ }
+ 
+ public int getidCategoriaProduto(){
+     return idCategoriaProduto;
  }
  
  public String getDescProduto(){
@@ -57,6 +63,10 @@ public class modeloEstoque {
  
  public void setQtdProd(int qtdProduto){
      this.qtdProduto = qtdProduto;
+ }
+ 
+ public void setidCategoriaProduto(int idCategoriaProduto){
+     this.idCategoriaProduto = idCategoriaProduto;
  }
  
  public void setDescProduto(String descricaoProduto){

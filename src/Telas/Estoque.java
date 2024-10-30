@@ -36,9 +36,7 @@ public class Estoque extends javax.swing.JFrame {
     private void initComponents() {
 
         butaoCadastrar = new javax.swing.JButton();
-        CampoCategoria = new javax.swing.JComboBox<>();
         butaoLimpar = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
         CampoNome = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         CampoPreco = new javax.swing.JTextField();
@@ -51,8 +49,9 @@ public class Estoque extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         CampoDesc = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        butaoExcluir = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        CampoID = new javax.swing.JTextField();
+        butaoExcluir = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -61,10 +60,11 @@ public class Estoque extends javax.swing.JFrame {
             }
         });
 
-        butaoCadastrar.setBackground(new java.awt.Color(153, 153, 153));
+        butaoCadastrar.setBackground(new java.awt.Color(255, 255, 255));
         butaoCadastrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        butaoCadastrar.setForeground(new java.awt.Color(0, 0, 0));
         butaoCadastrar.setText("Cadastrar");
-        butaoCadastrar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 5, true));
+        butaoCadastrar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 255, 255), 5, true));
         butaoCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 butaoCadastrarMouseClicked(evt);
@@ -76,13 +76,8 @@ public class Estoque extends javax.swing.JFrame {
             }
         });
 
-        CampoCategoria.setBackground(new java.awt.Color(153, 153, 153));
-        CampoCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Refrigerante", "Alcoólica", "Água", "Leite de macho" }));
-        CampoCategoria.setSelectedIndex(-1);
-        CampoCategoria.setBorder(null);
-        CampoCategoria.setFocusable(false);
-
-        butaoLimpar.setBackground(new java.awt.Color(153, 153, 153));
+        butaoLimpar.setBackground(new java.awt.Color(255, 255, 255));
+        butaoLimpar.setForeground(new java.awt.Color(0, 0, 0));
         butaoLimpar.setText("Limpa os campos");
         butaoLimpar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -95,20 +90,17 @@ public class Estoque extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel7.setText("Categoria");
-
-        CampoNome.setBackground(new java.awt.Color(153, 153, 153));
+        CampoNome.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setBackground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Nome do Produto");
 
-        CampoPreco.setBackground(new java.awt.Color(153, 153, 153));
+        CampoPreco.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setBackground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("Preço");
 
-        CampoQuantidade.setBackground(new java.awt.Color(153, 153, 153));
+        CampoQuantidade.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel4.setBackground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("Quantidade");
@@ -118,7 +110,7 @@ public class Estoque extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nome do Produto", "Preço", "Quantidade", "Categoria"
+                "ID", "Nome do Produto", "Preço", "Quantidade", "Desc"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -143,7 +135,8 @@ public class Estoque extends javax.swing.JFrame {
             TabelaEstoque.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        testarSQL.setBackground(new java.awt.Color(153, 153, 153));
+        testarSQL.setBackground(new java.awt.Color(255, 255, 255));
+        testarSQL.setForeground(new java.awt.Color(0, 0, 0));
         testarSQL.setText("testar SQL");
         testarSQL.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -158,31 +151,24 @@ public class Estoque extends javax.swing.JFrame {
 
         jLabel9.setText("Descrição");
 
-        CampoDesc.setBackground(new java.awt.Color(153, 153, 153));
+        CampoDesc.setBackground(new java.awt.Color(255, 255, 255));
+        CampoDesc.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         CampoDesc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CampoDescActionPerformed(evt);
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel5.setText("Estoque");
 
-        jButton1.setBackground(new java.awt.Color(153, 153, 153));
-        jButton1.setText("Mesa");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        jLabel1.setText("ID");
 
-        butaoExcluir.setBackground(new java.awt.Color(153, 153, 153));
-        butaoExcluir.setText("Excluir");
+        CampoID.setEditable(false);
+        CampoID.setBackground(new java.awt.Color(153, 153, 153));
+        CampoID.setFocusable(false);
+
+        butaoExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/trash (1).png"))); // NOI18N
         butaoExcluir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 butaoExcluirMouseClicked(evt);
@@ -193,10 +179,25 @@ public class Estoque extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel5)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(butaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(testarSQL)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(butaoLimpar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(butaoExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CampoDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CampoID, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(CampoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -207,67 +208,48 @@ public class Estoque extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(CampoQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CampoCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(CampoDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
-                    .addComponent(jLabel9)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(butaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(testarSQL)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(butaoLimpar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(butaoExcluir))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(36, 36, 36))
+                            .addComponent(jLabel4)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(CampoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(CampoPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CampoID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CampoQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(CampoCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel7))
+                                .addComponent(CampoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(CampoPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(CampoQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(24, 24, 24)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CampoDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                .addComponent(CampoDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(butaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(testarSQL)
-                    .addComponent(butaoLimpar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(butaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(testarSQL)
+                        .addComponent(butaoLimpar))
                     .addComponent(butaoExcluir))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -282,15 +264,17 @@ public class Estoque extends javax.swing.JFrame {
             if (contador == 0) {            
                 try{    
                    modeloEstoque cadastroP = new modeloEstoque();
-
+                   
                   cadastroP.setNomeProd(CampoNome.getText());
                   cadastroP.setPreco(Float.parseFloat(CampoPreco.getText()));
                   cadastroP.setQtdProd(Integer.parseInt(CampoQuantidade.getText()));   
+                  //cadastroP.setidCategoriaProduto(Integer.parseInt(CampoCategoria.getSelectedItem().toString()));  
                   cadastroP.setDescProduto(CampoDesc.getText());     
                   EstoqueDao cadastroPDao = new EstoqueDao();
                   cadastroPDao.inserir(cadastroP); 
                   limparTabela();
                   atualizaTabela(cadastroPDao);
+                  JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso!", "", INFORMATION_MESSAGE);
                   limparCampos();
                 }
                 catch(Exception ex){
@@ -298,9 +282,11 @@ public class Estoque extends javax.swing.JFrame {
                 } 
             }else{
                 modeloEstoque cadastroP = new modeloEstoque();
+                cadastroP.setIdProd(Integer.parseInt(CampoID.getText()));
                 cadastroP.setNomeProd(CampoNome.getText());
                 cadastroP.setPreco(Float.parseFloat(CampoPreco.getText()));
                 cadastroP.setQtdProd(Integer.parseInt(CampoQuantidade.getText()));  
+                //cadastroP.setidCategoriaProduto(Integer.parseInt(CampoCategoria.getSelectedItem().toString()));
                 cadastroP.setDescProduto(CampoDesc.getText());
 
                 EstoqueDao cadastroPDao = new EstoqueDao();
@@ -349,40 +335,14 @@ public class Estoque extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_CampoDescActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        // TODO add your handling code here:
-        new telaMesa().setVisible(true);
-    }//GEN-LAST:event_jButton1MouseClicked
-
-    private void butaoExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_butaoExcluirMouseClicked
-        if(TabelaEstoque.getSelectedRow() != -1){
-          int msgRetorno = JOptionPane.showConfirmDialog(null, 
-                                      "Confirme para remover o cadastro", 
-                                      "Confirmação", 
-                                      JOptionPane.YES_NO_OPTION); 
-                if (msgRetorno == JOptionPane.YES_OPTION) {
-                    DefaultTableModel tabelacadastro = (DefaultTableModel) TabelaEstoque.getModel();
-                    tabelacadastro.removeRow((TabelaEstoque.getSelectedRow()));  
-//                    EstoqueDao deleteitem = new EstoqueDao();
-//                    deleteitem.excluirID(CampoID.getText);
-                //Colocar um CampoID pra que possa excluir o Estoque, mas colocar o campo como inativo pra q nn de pra botar nada dentro
-                    limparCampos();
-                } 
-        }else{
-            JOptionPane.showMessageDialog(null, "Selecione um Cadastro para excluir!");
-        }
-    }//GEN-LAST:event_butaoExcluirMouseClicked
-
     private void TabelaEstoqueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaEstoqueMouseClicked
         if((TabelaEstoque.getSelectedRow() != -1) && (contador == 0) && (evt.getClickCount() == 2)){
-           CampoNome.setText(TabelaEstoque.getValueAt(TabelaEstoque.getSelectedRow(),0).toString());
-           CampoPreco.setText(TabelaEstoque.getValueAt(TabelaEstoque.getSelectedRow(),1).toString());
-           CampoQuantidade.setText(TabelaEstoque.getValueAt(TabelaEstoque.getSelectedRow(), 2).toString()); 
-           CampoDesc.setText(TabelaEstoque.getValueAt(TabelaEstoque.getSelectedRow(), 3).toString()); 
+           CampoID.setText(TabelaEstoque.getValueAt(TabelaEstoque.getSelectedRow(),0).toString());
+           CampoNome.setText(TabelaEstoque.getValueAt(TabelaEstoque.getSelectedRow(),1).toString());
+           CampoPreco.setText(TabelaEstoque.getValueAt(TabelaEstoque.getSelectedRow(),2).toString());
+           CampoQuantidade.setText(TabelaEstoque.getValueAt(TabelaEstoque.getSelectedRow(), 3).toString()); 
+           //CampoCategoria.setSelectedItem(TabelaEstoque.getValueAt(TabelaEstoque.getSelectedRow(),4).toString());
+           CampoDesc.setText(TabelaEstoque.getValueAt(TabelaEstoque.getSelectedRow(), 4).toString()); 
            contador = 1;
            TabelaEstoque.enable(false);
            butaoCadastrar.setText("Alterar");
@@ -393,13 +353,35 @@ public class Estoque extends javax.swing.JFrame {
         EstoqueDao estoqueAtt = new EstoqueDao();
         atualizaTabela(estoqueAtt);
     }//GEN-LAST:event_formWindowOpened
+
+    private void butaoExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_butaoExcluirMouseClicked
+        if(TabelaEstoque.getSelectedRow() != -1){
+          int msgRetorno = JOptionPane.showConfirmDialog(null, 
+                                      "Confirme para remover o cadastro", 
+                                      "Confirmação", 
+                                      JOptionPane.YES_NO_OPTION); 
+                if (msgRetorno == JOptionPane.YES_OPTION) {
+                    int ID = Integer.parseInt(CampoID.getText());
+                    DefaultTableModel tabelacadastro = (DefaultTableModel) TabelaEstoque.getModel();
+                    tabelacadastro.removeRow((TabelaEstoque.getSelectedRow()));  
+                    
+                    EstoqueDao deleteitem = new EstoqueDao();
+                    deleteitem.excluirID(ID);
+                    butaoCadastrar.setText("Cadastrar");  
+                    limparCampos();
+                } 
+        }else{
+            JOptionPane.showMessageDialog(null, "Selecione um Cadastro para excluir!");
+        }
+    }//GEN-LAST:event_butaoExcluirMouseClicked
     
     private void limparCampos(){
+        this.CampoID.setText("");
         this.CampoNome.setText("");
         this.CampoPreco.setText("");
         this.CampoQuantidade.setText("");   
         this.CampoDesc.setText("");  
-        this.CampoCategoria.setSelectedIndex(-1);
+        //this.CampoCategoria.setSelectedIndex(-1);
         }
     private void limparTabela(){
         //percorre a tabela e exclui todas as linhas
@@ -463,63 +445,21 @@ public class Estoque extends javax.swing.JFrame {
         });
     }
     
-    /* 
-    alterar ->
-    Tb01.setValueAt(jNome.getText(), Tb01.getSelectedRow(), 0);
-           Tb01.setValueAt(jCpf.getText(), Tb01.getSelectedRow(), 1);
-           Tb01.setValueAt(jEmail.getText(), Tb01.getSelectedRow(), 2);           
-           Tb01.setValueAt(jCBSexo.getSelectedItem().toString(), Tb01.getSelectedRow(), 3);
-           limparCampos();
-           vInsUpdate = 0;
-           Tb01.enable(true);
-           jBCadastrar.setText("Cadastrar");
-    cadastrar  DefaultTableModel tbcadastro = (DefaultTableModel) Tb01.getModel();
-                Object [] dados = {jNome.getText(), jCpf.getText(), jEmail.getText(), jCBSexo.getSelectedItem().toString()};
-                tbcadastro.addRow(dados)
-    
-    remover ->
-    if(Tb01.getSelectedRow() != -1){
-          int msgRetorno = JOptionPane.showConfirmDialog(null, 
-                                      "Confirme para remover o cadastro", 
-                                      "Confirmação", 
-                                      JOptionPane.YES_NO_OPTION); 
-                if (msgRetorno == JOptionPane.YES_OPTION) {
-                    DefaultTableModel tbcadastro = (DefaultTableModel) Tb01.getModel();
-                    tbcadastro.removeRow((Tb01.getSelectedRow()));  
-                    limparCampos();
-                } 
-        }else{
-            JOptionPane.showMessageDialog(null,
-    
-    mouse click ->
-    if((Tb01.getSelectedRow() != -1) && (vInsUpdate == 0) && (evt.getClickCount() == 2)){
-
-           jNome.setText(Tb01.getValueAt(Tb01.getSelectedRow(),0).toString());
-           jCpf.setText(Tb01.getValueAt(Tb01.getSelectedRow(),1).toString());
-           jCBSexo.setSelectedItem(Tb01.getValueAt(Tb01.getSelectedRow(),3).toString());
-           jEmail.setText(Tb01.getValueAt(Tb01.getSelectedRow(), 2).toString());
-           vInsUpdate = 1;
-           Tb01.enable(false);
-           jBCadastrar.setText("Alterar");
-        }
-    */
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> CampoCategoria;
     private javax.swing.JTextField CampoDesc;
+    private javax.swing.JTextField CampoID;
     private javax.swing.JTextField CampoNome;
     private javax.swing.JTextField CampoPreco;
     private javax.swing.JTextField CampoQuantidade;
     private javax.swing.JTable TabelaEstoque;
     private javax.swing.JButton butaoCadastrar;
-    private javax.swing.JButton butaoExcluir;
+    private javax.swing.JLabel butaoExcluir;
     private javax.swing.JButton butaoLimpar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton testarSQL;

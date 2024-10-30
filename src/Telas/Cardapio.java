@@ -67,7 +67,7 @@ public class Cardapio extends javax.swing.JFrame {
 
         TabelaCardapio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Teste", "5cao", null}
+
             },
             new String [] {
                 "Nome do Produto", "Valor", "Quantidade"

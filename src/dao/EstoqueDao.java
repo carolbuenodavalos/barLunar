@@ -35,6 +35,7 @@ public class EstoqueDao implements DaoGenerica<modeloEstoque>{
                 sentenca.setString(1,cadastro.getNomeProd()); 
                 sentenca.setFloat(2,cadastro.getPreco());
                 sentenca.setInt(3,cadastro.getQtdProd()); 
+                //sentenca.setInt(4,cadastro.getidCategoriaProduto()); 
                 sentenca.setString(4,cadastro.getDescProduto());               
                 sentenca.execute(); 
                 sentenca.close(); 
@@ -48,7 +49,7 @@ public class EstoqueDao implements DaoGenerica<modeloEstoque>{
 
     @Override
     public void alterar(modeloEstoque cadastro) {
-        String sql = "UPDATE Estoque SET nomeProduto = ?, preço = ?, qtdProduto = ?, descricaoProduto = ?";
+        String sql = "UPDATE Estoque SET nomeProduto = ?, preço = ?, qtdProduto = ?, descricaoProduto = ? WHERE idProduto = ?";
         
         try
         {
@@ -58,7 +59,9 @@ public class EstoqueDao implements DaoGenerica<modeloEstoque>{
                 sentenca.setString(1,cadastro.getNomeProd()); 
                 sentenca.setFloat(2,cadastro.getPreco());
                 sentenca.setInt(3,cadastro.getQtdProd()); 
+                //sentenca.setInt(4,cadastro.getidCategoriaProduto()); 
                 sentenca.setString(4,cadastro.getDescProduto()); 
+                sentenca.setInt(5, cadastro.getIdProd());
                 sentenca.execute();
                 sentenca.close();
                 this.conexao.getConnection().close();
@@ -113,6 +116,7 @@ public class EstoqueDao implements DaoGenerica<modeloEstoque>{
                     cadastro.setNomeProd(resultadoSentenca.getString("nomeProduto"));
                     cadastro.setPreco(resultadoSentenca.getFloat("preço"));
                     cadastro.setQtdProd(resultadoSentenca.getInt("qtdProduto"));
+                    //cadastro.setidCategoriaProduto(resultadoSentenca.getInt("idCategoriaProduto"));
                     cadastro.setDescProduto(resultadoSentenca.getString("descricaoProduto"));
                     
                     listaCadastros.add(cadastro);
@@ -152,6 +156,7 @@ public class EstoqueDao implements DaoGenerica<modeloEstoque>{
                     cadastro.setNomeProd(resultadoSentenca.getString("nomeProduto"));
                     cadastro.setPreco(resultadoSentenca.getFloat("preço"));
                     cadastro.setQtdProd(resultadoSentenca.getInt("qtdProduto"));
+                    //cadastro.setidCategoriaProduto(resultadoSentenca.getInt("idCategoriaProduto"));
                     cadastro.setDescProduto(resultadoSentenca.getString("descricaoProduto"));
                     
                     listaCadastrosStr.add(cadastro);

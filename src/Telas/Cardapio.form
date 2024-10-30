@@ -98,13 +98,9 @@
         <Component class="javax.swing.JTable" name="TabelaCardapio">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="3" rowCount="1">
-                <Column editable="false" title="Nome do Produto" type="java.lang.Object">
-                  <Data value="Teste"/>
-                </Column>
-                <Column editable="false" title="Valor" type="java.lang.Object">
-                  <Data value="5cao"/>
-                </Column>
+              <Table columnCount="3" rowCount="0">
+                <Column editable="false" title="Nome do Produto" type="java.lang.Object"/>
+                <Column editable="false" title="Valor" type="java.lang.Object"/>
                 <Column editable="true" title="Quantidade" type="java.lang.Object"/>
               </Table>
             </Property>
