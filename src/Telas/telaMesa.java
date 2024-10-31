@@ -5,11 +5,14 @@
 package Telas;
 
 import dao.FuncionarioDao;
+import dao.PedidoDao;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import javax.swing.table.DefaultTableModel;
 import models.modeloFuncionario;
+import models.modeloPedido;
 
 /**
  *
@@ -316,6 +319,21 @@ public class telaMesa extends javax.swing.JFrame {
                 
     }
     
+    private void abrirPedido(){
+        int idMesa = botaoMesa.getSelectedIndex()+1;
+        modeloPedido obejeto = new modeloPedido();
+        PedidoDao pedidoDAO = new PedidoDao();
+        ArrayList<modeloPedido> lista = pedidoDAO.consultarPedidoAberto(idMesa);
+        if(lista.isEmpty()){
+        obejeto.setIdMesa(idMesa);
+        obejeto.setStatusPedido("A");
+        pedidoDAO.inserir(obejeto);
+        }else{
+        obejeto = lista.get(0);
+        }
+    }
+    
+    
     private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
            
        if(vInsUpdate == 0){
@@ -326,7 +344,8 @@ public class telaMesa extends javax.swing.JFrame {
             DefaultTableModel tbcadastro = (DefaultTableModel) Tb01.getModel();
             Object [] dados = {botaoMesa.getSelectedItem(), statusMesa.getSelectedItem(),CampoFunc.getSelectedItem()};
             tbcadastro.addRow(dados);
-            //limparCampos ();
+            this.abrirPedido();
+            //limparCampos();
         } else {
             /*SE FOR IGUAL A 1, ENTÃO SIGNIFICA QUE ELE VAI ATUALIZAR O CADASTRO, ENTÃO ELE VAI PEGAR O USUARIO
             SELECIONADO ALTERAR O QUE TEM QUE SER ALTERADO E COLOCAR NA TABELA O CADASTRO JA ATUALIZADO*/

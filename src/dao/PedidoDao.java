@@ -164,6 +164,42 @@ public class PedidoDao implements DaoGenerica<modeloPedido>{
         } 
     }
     
+    public ArrayList<modeloPedido> consultarPedidoAberto(int idMesa) {
+     ArrayList<modeloPedido> listaCadastros = new ArrayList<modeloPedido>();
+        String sql = "SELECT c.idMesa, c.idPedido, c.statusPedido "+
+                     "FROM Pedido as c "+
+                     "WHERE c.idMesa = ? "+
+                     "AND c.statusPedido = 'A' " +
+                     "ORDER BY c.idPedido";
+        try
+        {
+            if(this.conexao.conectar())
+            {
+                PreparedStatement sentenca = this.conexao.getConnection().prepareStatement(sql);
+                ResultSet resultadoSentenca = sentenca.executeQuery();
+                while(resultadoSentenca.next()) 
+                {
+                    
+                    modeloPedido cadastro = new modeloPedido();
+                    cadastro.setIdMesa(resultadoSentenca.getInt("idMesa"));
+                    cadastro.setIdPedido(resultadoSentenca.getInt("idPedido"));
+                    cadastro.setStatusPedido(resultadoSentenca.getString("statusPedido"));
+                    cadastro.setItensPedido(this.consultarItens(cadastro.getIdPedido()));
+                    listaCadastros.add(cadastro);
+                }
+
+                sentenca.close();
+                this.conexao.getConnection().close();
+            }
+            
+            return listaCadastros;
+        }
+        catch(SQLException ex)
+        {
+           throw new RuntimeException(ex);
+        } 
+    }
+    
 
     @Override
     public ArrayList<modeloPedido> dashboard() {
