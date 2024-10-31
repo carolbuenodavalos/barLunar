@@ -23,6 +23,11 @@ public class EstoqueDao implements DaoGenerica<modeloEstoque>{
         this.conexao = new ConexaoBanco();
     }
     
+    public EstoqueDao(ConexaoBanco conexao)
+    {
+        this.conexao = conexao;
+    }
+    
     @Override
     public void inserir(modeloEstoque cadastro) {
         String sql = "INSERT INTO Estoque (nomeProduto, preço, qtdProduto, descricaoProduto) VALUES (?,?,?,?)";
