@@ -6,8 +6,11 @@ package Telas;
 
 import dao.EstoqueDao;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 import models.modeloEstoque;
 
@@ -129,7 +132,7 @@ public class Cardapio extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
-  
+        processarPedido();
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
@@ -201,6 +204,41 @@ public class Cardapio extends javax.swing.JFrame {
                 }
      
     }
+    private void processarPedido() {
+    DefaultTableModel modeloTabela = (DefaultTableModel) TabelaCardapio.getModel();
+    ArrayList<String> pedidos = new ArrayList<>();
+
+    for (int i = 0; i < modeloTabela.getRowCount(); i++) {
+        String quantidadeStr = (String) modeloTabela.getValueAt(i, 2); // Assumindo que a coluna de quantidade é a terceira
+        if (quantidadeStr != null && !quantidadeStr.isEmpty() && quantidadeStr.matches("\\d+")) {
+            int quantidade = Integer.parseInt(quantidadeStr);
+            String nome = (String) modeloTabela.getValueAt(i, 0); // Nome na primeira coluna
+            int valor = Integer.parseInt((String) modeloTabela.getValueAt(i, 1)); // Valor na segunda coluna
+            int total = quantidade * valor;
+            pedidos.add(nome + ": \n" + "Quantidade: " + quantidade + "\nValor Total: R$ " + total + "\n==");
+        }
+    }
+
+    exibirPedidos(pedidos);
+}
+
+    private void exibirPedidos(ArrayList<String> pedidos) {
+    // Limpa a área de pedidos na tela de "Pedidos"
+    JTextArea areaPedidos = new JTextArea();
+    areaPedidos.setText(""); // Limpa o conteúdo anterior
+    
+    for (String pedido : pedidos) {
+        areaPedidos.append(pedido + "\n");
+    }
+    areaPedidos.setEditable(false);
+
+    // Exibe o pedido na nova janela de "Pedidos"
+    JFrame frame = new JFrame("Resumo do Pedido");
+    frame.setSize(300, 400);
+    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    frame.add(new JScrollPane(areaPedidos));
+    frame.setVisible(true);
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TabelaCardapio;
