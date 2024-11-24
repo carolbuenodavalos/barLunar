@@ -17,12 +17,14 @@ import javax.print.attribute.standard.OrientationRequested;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 import models.modeloEstoque;
 import models.modeloFuncionario;
+import models.modeloMesa;
 import models.modeloPedido;
 
 /**
@@ -121,11 +123,11 @@ public class telaMesa extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mesa", "Status", "Funcionario", "Pedido"
+                "ID", "Mesa", "Status", "Funcionario", "Pedido"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -211,6 +213,18 @@ public class telaMesa extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(botaoSalvar)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jButton1))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(idMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labelIdMesa)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -225,20 +239,8 @@ public class telaMesa extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(CampoFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(botaoSalvar)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane6)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton1)
-                                    .addComponent(jLabel4))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(18, 18, 18)
+                            .addComponent(CampoFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -273,17 +275,19 @@ public class telaMesa extends javax.swing.JFrame {
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(CampoFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(75, 75, 75)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(135, 135, 135)
                                 .addComponent(botaoSalvar)
                                 .addGap(18, 18, 18)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane6)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addGap(18, 18, 18)
@@ -394,6 +398,8 @@ public class telaMesa extends javax.swing.JFrame {
         atualizarFuncionario(DaoFunc);
         EstoqueDao estoqueAtt = new EstoqueDao();
         atualizaTabela(estoqueAtt);
+        MesaDao attmesa = new MesaDao();
+        atualizaMesas(attmesa);
     }//GEN-LAST:event_formWindowOpened
 
     private void TabelaCardapioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TabelaCardapioFocusLost
@@ -414,9 +420,20 @@ private void salvarInformacoes() {
     String pedidos = TabelaPedidos.getText();
 
     // Adicionar informações na tabela Tb01
-    DefaultTableModel modeloMesa = (DefaultTableModel) Tb01.getModel();
-    modeloMesa.addRow(new Object[]{mesa, status, funcionario, pedidos});
-
+    //DefaultTableModel modeloMesa = (DefaultTableModel) Tb01.getModel();
+    //modeloMesa.addRow(new Object[]{mesa, status, funcionario, pedidos});
+                  
+                  modeloMesa cadastroP = new modeloMesa();
+                  
+                  cadastroP.setMesa(ComboMesa.getSelectedItem().toString());
+                  cadastroP.setStatusMesa(statusMesa.getSelectedItem().toString()); 
+                  cadastroP.setFuncionario(CampoFunc.getSelectedItem().toString());    
+                  cadastroP.setPedido(pedidos);     
+                  MesaDao cadastroPDao = new MesaDao();
+                  cadastroPDao.inserir(cadastroP); 
+                  limparTabela();
+                  atualizaMesas(cadastroPDao);
+                  JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso!", "", INFORMATION_MESSAGE);
     // Salvar as informações no banco de dados
     //salvarNoBancoDeDados(mesa, status, funcionario, pedidos);
 
@@ -424,6 +441,8 @@ private void salvarInformacoes() {
     TabelaPedidos.setText("");
     EstoqueDao estoqueAtt = new EstoqueDao();
     atualizaTabela(estoqueAtt);
+    MesaDao attmesa = new MesaDao();
+    atualizaMesas(attmesa);
 }
 
  private void processarPedido() {
@@ -451,7 +470,7 @@ private void salvarInformacoes() {
          TabelaPedidos.setText(textoPedidos.toString());
 
          // Salvar a informação no banco de dados
-         salvarNoBancoDeDados(textoPedidos.toString());
+         //salvarNoBancoDeDados(textoPedidos.toString());
 
          // Adicionar informações na tabela Tb01
          //String mesa = ComboMesa.getSelectedItem().toString();
@@ -467,9 +486,9 @@ private void salvarInformacoes() {
 }
 
 private void salvarNoBancoDeDados(String textoPedidos) {
-        MesaDao mesaDao = new MesaDao();
-       // mesaDao.salvarPedido(textoPedidos); //tem q fazer o MesaDao
-        //mesaDao.salvarPedido(mesa, status, funcionario, pedidos); assim fara com q armazene tudo no banco de dados
+       // MesaDao mesaDao = new MesaDao();
+        //mesaDao.inserir(textoPedidos); 
+        //mesaDao.salvarPedido(mesa, status, funcionario, pedidos);
     }
 
     private void exibirPedidos(ArrayList<String> pedidos) {
@@ -508,6 +527,33 @@ private void salvarNoBancoDeDados(String textoPedidos) {
                 }
      
     }
+    
+     private void atualizaMesas(MesaDao cadastroPDao){
+        try{
+                    limparMesas();
+
+                    ArrayList<modeloMesa> listaCadastros;
+                    listaCadastros = cadastroPDao.consultar();        
+                    DefaultTableModel modeloTabela = (DefaultTableModel) Tb01.getModel();
+
+                    for (modeloMesa cadastroP : listaCadastros) {
+                            modeloTabela.addRow(new String[]{
+                                Integer.toString(cadastroP.getIdMesa()),
+                                cadastroP.getMesa(),
+                                cadastroP.getStatusMesa(),
+                                cadastroP.getFuncionario(),
+                                cadastroP.getPedido()
+                            });
+                        }
+
+
+                }
+                catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado:\n" + ex.getMessage(), "ERRO!", ERROR_MESSAGE);
+                }
+     
+    }
+     
     private void limparTabela(){
         //percorre a tabela e exclui todas as linhas
         while(TabelaCardapio.getRowCount() > 0){
@@ -516,6 +562,13 @@ private void salvarNoBancoDeDados(String textoPedidos) {
         }
     }
     
+    private void limparMesas(){
+        //percorre a tabela e exclui todas as linhas
+        while(Tb01.getRowCount() > 0){
+            DefaultTableModel dm = (DefaultTableModel) Tb01.getModel();
+            dm.getDataVector().removeAllElements();
+        }
+    }
     private void imprimirNota(){
         MessageFormat header = new MessageFormat("Nota Fiscal");
         MessageFormat footer = new MessageFormat("Bar Lunar");

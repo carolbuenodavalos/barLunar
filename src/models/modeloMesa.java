@@ -10,43 +10,64 @@ package models;
  */
   public class modeloMesa {
     private int idMesa;
-    private int numeroMesa;
+    private String mesa;
     private String statusMesa;
-    
+    private String funcionario;
+    private String Pedido;
     
    public modeloMesa(){
    }
    
-   public modeloMesa(int idMesa, int numeroMesa, String statusMesa){
+   public modeloMesa(int idMesa, String mesa, String statusMesa, String funcionario, String Pedido){
        this.idMesa = idMesa;
-       this.numeroMesa = numeroMesa;
+       this.mesa = mesa;
        this.statusMesa = statusMesa;
+       this.funcionario = funcionario;
+       this.Pedido = Pedido;
    }
+
+    public int getIdMesa() {
+        return idMesa;
+    }
+
+    public void setIdMesa(int idMesa) {
+        this.idMesa = idMesa;
+    }
+
+    public String getMesa() {
+        return mesa;
+    }
+
+    public void setMesa(String mesa) {
+        this.mesa = mesa;
+    }
+
+    public String getStatusMesa() {
+        return statusMesa;
+    }
+
+    public void setStatusMesa(String statusMesa) {
+        this.statusMesa = statusMesa;
+    }
+
+    public String getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(String funcionario) {
+        this.funcionario = funcionario;
+    }
+
+    public String getPedido() {
+        return Pedido;
+    }
+
+    public void setPedido(String Pedido) {
+        this.Pedido = Pedido;
+    }
    
    
-   public int getIdMesa(){
-       return idMesa;
-   }
    
-   public void setIdMesa(int idMesa){
-       this.idMesa = idMesa;
-   }
-   
-   public int getNumeroMesa(){
-       return numeroMesa;
-   }
-   
-   public void setNumeroMesa(int numeroMesa){
-       this.numeroMesa = numeroMesa;
-   }
- 
- public String getStatusMesa(){
-     return statusMesa;
- }
- 
- public void setStatusMesa(String statusMesa){
-     this.statusMesa = statusMesa;
- }
  
     
 }

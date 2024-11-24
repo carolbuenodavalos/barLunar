@@ -52,6 +52,23 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="botaoSalvar" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane2" alignment="0" min="-2" pref="395" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane6" pref="246" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="idMesa" alignment="0" min="-2" pref="75" max="-2" attributes="0"/>
@@ -74,25 +91,8 @@
                           <Component id="CampoFunc" min="-2" pref="144" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="botaoSalvar" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPane2" alignment="0" min="-2" pref="395" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane6" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
               </Group>
-              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jScrollPane4" alignment="0" min="-2" pref="422" max="-2" attributes="0"/>
@@ -138,18 +138,21 @@
                               <Component id="CampoFunc" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
                               <Component id="botaoSalvar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jScrollPane2" min="-2" pref="185" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane6" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jScrollPane6" min="-2" pref="245" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
@@ -231,7 +234,8 @@
         <Component class="javax.swing.JTable" name="Tb01">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="4" rowCount="0">
+              <Table columnCount="5" rowCount="0">
+                <Column editable="false" title="ID" type="java.lang.Object"/>
                 <Column editable="false" title="Mesa" type="java.lang.Object"/>
                 <Column editable="false" title="Status" type="java.lang.Object"/>
                 <Column editable="false" title="Funcionario" type="java.lang.Object"/>
@@ -240,6 +244,11 @@
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>

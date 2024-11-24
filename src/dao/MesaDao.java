@@ -24,28 +24,102 @@ public class MesaDao implements DaoGenerica<modeloMesa> {
     }
 
     @Override
-    public void inserir(modeloMesa objt) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void inserir(modeloMesa cadastro) {
+        String sql = "INSERT INTO Mesa (mesa, statusMesa, funcionario, Pedido) VALUES (?,?,?,?)";
+        
+        try{
+ 
+            if(this.conexao.conectar()){
+                PreparedStatement sentenca = this.conexao.getConnection().prepareStatement(sql);
+                
+                sentenca.setString(1,cadastro.getMesa()); 
+                sentenca.setString(2,cadastro.getStatusMesa());
+                sentenca.setString(3,cadastro.getFuncionario()); 
+                sentenca.setString(4,cadastro.getPedido()); 
+            
+                sentenca.execute(); 
+                sentenca.close(); 
+                this.conexao.getConnection().close();
+            }
+        }
+        catch(SQLException ex){
+           throw new RuntimeException(ex);
+        }
     }
 
     @Override
-    public void alterar(modeloMesa objt) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void alterar(modeloMesa cadastro) {
+         String sql = "UPDATE Mesa SET mesa = ?, statusMesa = ?, funcionario = ?, Pedido = ? WHERE idMesa = ?";
+        
+        try
+        {
+            if(this.conexao.conectar())
+            {
+                PreparedStatement sentenca = this.conexao.getConnection().prepareStatement(sql); 
+                sentenca.setString(1,cadastro.getMesa()); 
+                sentenca.setString(2,cadastro.getStatusMesa());
+                sentenca.setString(3,cadastro.getFuncionario()); 
+                sentenca.setString(4,cadastro.getPedido());
+                sentenca.setInt(5,cadastro.getIdMesa());
+                
+                sentenca.execute();
+                sentenca.close();
+                this.conexao.getConnection().close();
+            }
+        }
+        catch(SQLException ex)
+        {
+           throw new RuntimeException(ex);
+        }
     }
 
     @Override
     public void excluir() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
     }
 
     @Override
     public ArrayList<modeloMesa> consultar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<modeloMesa> listaCadastros = new ArrayList<modeloMesa>();
+        String sql = "SELECT c.idMesa, c.mesa, c.statusMesa, c.funcionario, c.Pedido "+
+                     "FROM Mesa as c "+
+                     "ORDER BY c.idMesa";
+        try
+        {
+            if(this.conexao.conectar())
+            {
+                PreparedStatement sentenca = this.conexao.getConnection().prepareStatement(sql);
+                ResultSet resultadoSentenca = sentenca.executeQuery();
+                while(resultadoSentenca.next()) 
+                {
+                    
+                    modeloMesa cadastro = new modeloMesa();
+                    cadastro.setIdMesa(resultadoSentenca.getInt("idMesa"));
+                    cadastro.setMesa(resultadoSentenca.getString("mesa"));
+                    cadastro.setStatusMesa(resultadoSentenca.getString("statusMesa"));
+                    cadastro.setFuncionario(resultadoSentenca.getString("funcionario"));
+                    cadastro.setPedido(resultadoSentenca.getString("Pedido"));
+                    
+                    listaCadastros.add(cadastro);
+                }
+
+                sentenca.close();
+                this.conexao.getConnection().close();
+            }
+            
+            return listaCadastros;
+        }
+        catch(SQLException ex)
+        {
+           throw new RuntimeException(ex);
+        } 
     }
 
     @Override
     public ArrayList<modeloMesa> dashboard() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        return null;
+        
     }
     
 }
