@@ -51,7 +51,7 @@ public class telaMesa extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        idMesa = new javax.swing.JTextField();
+        CampoID = new javax.swing.JTextField();
         labelIdMesa = new javax.swing.JLabel();
         ComboMesa = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
@@ -91,9 +91,10 @@ public class telaMesa extends javax.swing.JFrame {
             }
         });
 
-        idMesa.addActionListener(new java.awt.event.ActionListener() {
+        CampoID.setEditable(false);
+        CampoID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idMesaActionPerformed(evt);
+                CampoIDActionPerformed(evt);
             }
         });
 
@@ -225,7 +226,7 @@ public class telaMesa extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(idMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CampoID, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labelIdMesa)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(31, 31, 31)
@@ -261,7 +262,7 @@ public class telaMesa extends javax.swing.JFrame {
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(labelIdMesa)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(idMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(CampoID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(jLabel1)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -298,9 +299,9 @@ public class telaMesa extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void idMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idMesaActionPerformed
+    private void CampoIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoIDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_idMesaActionPerformed
+    }//GEN-LAST:event_CampoIDActionPerformed
 
     private void ComboMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboMesaActionPerformed
         // TODO add your handling code here:
@@ -312,7 +313,7 @@ public class telaMesa extends javax.swing.JFrame {
     
     private void limparCampos()
     {
-        //limpando todos os campos textos
+        this.CampoID.setText("");
         this.ComboMesa.setSelectedIndex(-1);
         this.statusMesa.setSelectedIndex(-1);
         this.CampoFunc.setSelectedIndex(-1);
@@ -351,23 +352,7 @@ public class telaMesa extends javax.swing.JFrame {
     
     private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
            
-       if(vInsUpdate == 0){
-        
-            //DefaultTableModel tbcadastro = (DefaultTableModel) Tb01.getModel();
-            //Object [] dados = {ComboMesa.getSelectedItem(), statusMesa.getSelectedItem(),CampoFunc.getSelectedItem()};
-            //tbcadastro.addRow(dados);
-            //this.abrirPedido();
-            //limparCampos();
-        } else {
-            //Tb01.setValueAt(ComboMesa.getSelectedItem(), Tb01.getSelectedRow(), 0);
-            //Tb01.setValueAt(statusMesa.getSelectedItem(), Tb01.getSelectedRow(), 1);
-            //Tb01.setValueAt(CampoFunc.getSelectedItem(), Tb01.getSelectedRow(), 8);
-            
-         limparCampos();
-          vInsUpdate = 0;
-            Tb01.enable(true);
-            botaoSalvar.setText("CADASTRAR");
-        }
+       
     }//GEN-LAST:event_botaoSalvarActionPerformed
 
     private void statusMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusMesaActionPerformed
@@ -382,14 +367,15 @@ public class telaMesa extends javax.swing.JFrame {
     private void Tb01MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tb01MouseClicked
         if((Tb01.getSelectedRow() != -1) && (vInsUpdate == 0) && (evt.getClickCount() == 2)){
            
-           ComboMesa.setSelectedItem(Tb01.getValueAt(Tb01.getSelectedRow(),0).toString());
-           statusMesa.setSelectedItem(Tb01.getValueAt(Tb01.getSelectedRow(),1).toString()); 
-           CampoFunc.setSelectedItem(Tb01.getValueAt(Tb01.getSelectedRow(),2).toString());  
-           String pedidos = Tb01.getValueAt(Tb01.getSelectedRow(), 3).toString(); 
+           CampoID.setText(Tb01.getValueAt(Tb01.getSelectedRow(),0).toString());
+           ComboMesa.setSelectedItem(Tb01.getValueAt(Tb01.getSelectedRow(),1).toString());
+           statusMesa.setSelectedItem(Tb01.getValueAt(Tb01.getSelectedRow(),2).toString()); 
+           CampoFunc.setSelectedItem(Tb01.getValueAt(Tb01.getSelectedRow(),3).toString());  
+           String pedidos = Tb01.getValueAt(Tb01.getSelectedRow(), 4).toString(); 
            TabelaPedidos.setText(pedidos);
            vInsUpdate = 1;
            Tb01.enable(false);
-           botaoSalvar.setText("ALTERAR");
+           botaoSalvar.setText("Alterar");
         }
     }//GEN-LAST:event_Tb01MouseClicked
     
@@ -411,10 +397,16 @@ public class telaMesa extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1MouseClicked
 
 private void salvarInformacoes() {
-    // Obter as informações das seleções
-    String mesa = ComboMesa.getSelectedItem().toString();
-    String status = statusMesa.getSelectedItem().toString();
-    String funcionario = CampoFunc.getSelectedItem().toString();
+   if (ComboMesa.getSelectedItem() == null || statusMesa.getSelectedItem() == null || CampoFunc.getSelectedItem() == null) {
+                   JOptionPane.showMessageDialog(null, "Nenhum dado idendificado");
+                   ComboMesa.requestFocus();
+       }else{
+        if (vInsUpdate == 0) {            
+                try{    
+                  // Obter as informações das seleções
+    String mesa = (ComboMesa.getSelectedItem() != null) ? ComboMesa.getSelectedItem().toString() : "Mesa 404";
+    String status = (statusMesa.getSelectedItem() != null) ? statusMesa.getSelectedItem().toString() : "Status 404";
+    String funcionario = (CampoFunc.getSelectedItem() != null) ? CampoFunc.getSelectedItem().toString() : "Funcionário 404";
 
     // Obter os pedidos do JTextArea
     String pedidos = TabelaPedidos.getText();
@@ -423,19 +415,16 @@ private void salvarInformacoes() {
     //DefaultTableModel modeloMesa = (DefaultTableModel) Tb01.getModel();
     //modeloMesa.addRow(new Object[]{mesa, status, funcionario, pedidos});
                   
-                  modeloMesa cadastroP = new modeloMesa();
+    modeloMesa cadastroP = new modeloMesa();
                   
-                  cadastroP.setMesa(ComboMesa.getSelectedItem().toString());
-                  cadastroP.setStatusMesa(statusMesa.getSelectedItem().toString()); 
-                  cadastroP.setFuncionario(CampoFunc.getSelectedItem().toString());    
-                  cadastroP.setPedido(pedidos);     
-                  MesaDao cadastroPDao = new MesaDao();
-                  cadastroPDao.inserir(cadastroP); 
-                  limparTabela();
-                  atualizaMesas(cadastroPDao);
-                  JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso!", "", INFORMATION_MESSAGE);
-    // Salvar as informações no banco de dados
-    //salvarNoBancoDeDados(mesa, status, funcionario, pedidos);
+    cadastroP.setMesa(mesa);
+    cadastroP.setStatusMesa(status); 
+    cadastroP.setFuncionario(funcionario);    
+    cadastroP.setPedido(pedidos);     
+    MesaDao cadastroPDao = new MesaDao();
+    cadastroPDao.inserir(cadastroP); 
+    limparTabela();
+    JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso!", "", INFORMATION_MESSAGE);
 
     // Resetar o campo de texto do JTextArea
     TabelaPedidos.setText("");
@@ -443,55 +432,100 @@ private void salvarInformacoes() {
     atualizaTabela(estoqueAtt);
     MesaDao attmesa = new MesaDao();
     atualizaMesas(attmesa);
+    limparCampos();
+                }
+                catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado:\n" + ex.getMessage(), "ERRO!", ERROR_MESSAGE);
+                } 
+            }else{
+                // Obter as informações das seleções
+    String mesa = (ComboMesa.getSelectedItem() != null) ? ComboMesa.getSelectedItem().toString() : "Mesa 404";
+    String status = (statusMesa.getSelectedItem() != null) ? statusMesa.getSelectedItem().toString() : "Status 404";
+    String funcionario = (CampoFunc.getSelectedItem() != null) ? CampoFunc.getSelectedItem().toString() : "Funcionário 404";
+
+    // Obter os pedidos do JTextArea
+    String pedidos = TabelaPedidos.getText();
+
+    // Adicionar informações na tabela Tb01
+    //DefaultTableModel modeloMesa = (DefaultTableModel) Tb01.getModel();
+    //modeloMesa.addRow(new Object[]{mesa, status, funcionario, pedidos});
+                  
+    modeloMesa cadastroP = new modeloMesa();
+    
+    cadastroP.setIdMesa(Integer.parseInt(CampoID.getText()));
+    cadastroP.setMesa(mesa);
+    cadastroP.setStatusMesa(status); 
+    cadastroP.setFuncionario(funcionario);    
+    cadastroP.setPedido(pedidos);     
+    MesaDao cadastroPDao = new MesaDao();
+    cadastroPDao.alterar(cadastroP); 
+    limparTabela();
+    JOptionPane.showMessageDialog(null, "Alteração feita com sucesso!", "", INFORMATION_MESSAGE);
+
+    // Resetar o campo de texto do JTextArea
+    TabelaPedidos.setText("");
+    EstoqueDao estoqueAtt = new EstoqueDao();
+    atualizaTabela(estoqueAtt);
+    MesaDao attmesa = new MesaDao();
+    atualizaMesas(attmesa);
+    limparCampos();
+                
+                vInsUpdate = 0;
+                Tb01.setVisible(true);
+                botaoSalvar.setText("Salvar");                
+            }    
+    }
+    
 }
+
 
  private void processarPedido() {
-     
-     DefaultTableModel modeloTabela = (DefaultTableModel) TabelaCardapio.getModel();
-     ArrayList<String> pedidos = new ArrayList<>();
+    DefaultTableModel modeloTabela = (DefaultTableModel) TabelaCardapio.getModel();
+    ArrayList<String> pedidos = new ArrayList<>();
+    int valorTotal = 0;
 
-   for (int i = 0; i < modeloTabela.getRowCount(); i++) {
-            String quantidadeStr = (String) modeloTabela.getValueAt(i, 2); 
-            if (quantidadeStr != null && !quantidadeStr.isEmpty() && quantidadeStr.matches("\\d+")) {
-                int quantidade = Integer.parseInt(quantidadeStr);
-                String nome = (String) modeloTabela.getValueAt(i, 0); 
-                int valor = Integer.parseInt((String) modeloTabela.getValueAt(i, 1)); 
-                int total = quantidade * valor;
-                pedidos.add(nome + ": \n" + "Quantidade: " + quantidade + "\nValor Total: R$ " + total + "\n==");
-            }
+    for (int i = 0; i < modeloTabela.getRowCount(); i++) {
+        String quantidadeStr = (String) modeloTabela.getValueAt(i, 2);
+        if (quantidadeStr != null && !quantidadeStr.isEmpty() && quantidadeStr.matches("\\d+")) {
+            int quantidade = Integer.parseInt(quantidadeStr);
+            String nome = (String) modeloTabela.getValueAt(i, 0);
+            int valor = Integer.parseInt((String) modeloTabela.getValueAt(i, 1));
+            int total = quantidade * valor;
+            pedidos.add(nome + ":\n" + "Quantidade: " + quantidade + "\nPreço do produto: R$ " + valor + "\nValor do conjunto: R$ " + total + "\n==");
+            valorTotal += total;
         }
-        // Concatenar todos os pedidos em uma única string
-         StringBuilder textoPedidos = new StringBuilder();
-         for (String pedido : pedidos) {
-             textoPedidos.append(pedido).append("\n");
-         }
-
-         // Adicionar os pedidos ao JTextArea
-         TabelaPedidos.setText(textoPedidos.toString());
-
-         // Salvar a informação no banco de dados
-         //salvarNoBancoDeDados(textoPedidos.toString());
-
-         // Adicionar informações na tabela Tb01
-         //String mesa = ComboMesa.getSelectedItem().toString();
-         //String status = statusMesa.getSelectedItem().toString();
-         //String funcionario = CampoFunc.getSelectedItem().toString();
-         //DefaultTableModel modeloMesa = (DefaultTableModel) Tb01.getModel();
-         //modeloMesa.addRow(new Object[]{mesa, status, funcionario, textoPedidos.toString()});
-        exibirPedidos(pedidos);
-
-        // Obter texto do JTextArea e salvar no banco de dados (Na teoria, pois temos q ver sobre)
-        //String textoPedidos = TabelaPedidos.getText();
-        //salvarNoBancoDeDados(textoPedidos);
-}
-
-private void salvarNoBancoDeDados(String textoPedidos) {
-       // MesaDao mesaDao = new MesaDao();
-        //mesaDao.inserir(textoPedidos); 
-        //mesaDao.salvarPedido(mesa, status, funcionario, pedidos);
     }
 
-    private void exibirPedidos(ArrayList<String> pedidos) {
+    // Concatenar todos os pedidos em uma única string
+    StringBuilder textoPedidos = new StringBuilder();
+    for (String pedido : pedidos) {
+        textoPedidos.append(pedido).append("\n");
+    }
+
+    // Adicionar o valor total do pedido ao final
+    textoPedidos.append("Valor total do pedido: R$ ").append(valorTotal);
+
+    // Adicionar os pedidos ao JTextArea
+    TabelaPedidos.setText(textoPedidos.toString());
+
+    // Salvar a informação no banco de dados
+    // salvarNoBancoDeDados(textoPedidos.toString());
+
+    // Adicionar informações na tabela Tb01
+    // String mesa = ComboMesa.getSelectedItem().toString();
+    // String status = statusMesa.getSelectedItem().toString();
+    // String funcionario = CampoFunc.getSelectedItem().toString();
+    // DefaultTableModel modeloMesa = (DefaultTableModel) Tb01.getModel();
+    // modeloMesa.addRow(new Object[]{mesa, status, funcionario, textoPedidos.toString()});
+    exibirPedidos(pedidos, valorTotal);
+
+    // Obter texto do JTextArea e salvar no banco de dados (Na teoria, pois temos q ver sobre)
+    // String textoPedidos = TabelaPedidos.getText();
+    // salvarNoBancoDeDados(textoPedidos);
+}
+
+
+    private void exibirPedidos(ArrayList<String> pedidos, int valorTotal) {
     // Limpa a área de pedidos na tela de "Pedidos"
     JTextArea areaPedidos = new JTextArea();
     areaPedidos.setText(""); // Limpa o conteúdo anterior
@@ -499,6 +533,8 @@ private void salvarNoBancoDeDados(String textoPedidos) {
     for (String pedido : pedidos) {
         areaPedidos.append(pedido + "\n");
     }
+    
+    
     areaPedidos.setEditable(false);
 
     // Exibe o pedido na nova janela de "Pedidos"
@@ -576,15 +612,30 @@ private void salvarNoBancoDeDados(String textoPedidos) {
                 HashPrintRequestAttributeSet set = new HashPrintRequestAttributeSet();
                 set.add(OrientationRequested.LANDSCAPE);
                 TabelaPedidos.print(header, footer);
-                JOptionPane.showMessageDialog(null, "\n" + "impressao concluida");
+                JOptionPane.showMessageDialog(null, "\n" + "Nota Fiscal imprimido no caixa");
+                fecharMesa();
         }catch (java.awt.print.PrinterException e){
-                JOptionPane.showMessageDialog(null, "\n"+"Falha" + "\n" + e);
+                JOptionPane.showMessageDialog(null, "\n"+"Falha na impressão" + "\n" + e);
 
 
 
         }   
     }
     
+    private void fecharMesa(){
+         if(Tb01.getSelectedRow() != -1){
+                    int ID = Integer.parseInt(CampoID.getText());
+                    DefaultTableModel tabelacadastro = (DefaultTableModel) Tb01.getModel();
+                    tabelacadastro.removeRow((Tb01.getSelectedRow()));  
+                    
+                    MesaDao deleteitem = new MesaDao();
+                    deleteitem.excluirID(ID);  
+                    limparCampos();
+                
+        }else{
+            JOptionPane.showMessageDialog(null, "Selecione um Cadastro para excluir!");
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -622,12 +673,12 @@ private void salvarNoBancoDeDados(String textoPedidos) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> CampoFunc;
+    private javax.swing.JTextField CampoID;
     private javax.swing.JComboBox<String> ComboMesa;
     private javax.swing.JTable TabelaCardapio;
     private javax.swing.JTextArea TabelaPedidos;
     private javax.swing.JTable Tb01;
     private javax.swing.JButton botaoSalvar;
-    private javax.swing.JTextField idMesa;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

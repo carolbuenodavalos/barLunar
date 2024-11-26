@@ -71,7 +71,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="idMesa" alignment="0" min="-2" pref="75" max="-2" attributes="0"/>
+                          <Component id="CampoID" alignment="0" min="-2" pref="75" max="-2" attributes="0"/>
                           <Component id="labelIdMesa" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
                       </Group>
@@ -116,7 +116,7 @@
                                       <Group type="102" attributes="0">
                                           <Component id="labelIdMesa" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="idMesa" min="-2" max="-2" attributes="0"/>
+                                          <Component id="CampoID" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
                                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -167,9 +167,12 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="idMesa">
+    <Component class="javax.swing.JTextField" name="CampoID">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="idMesaActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CampoIDActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="labelIdMesa">

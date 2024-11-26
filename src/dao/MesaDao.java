@@ -114,6 +114,28 @@ public class MesaDao implements DaoGenerica<modeloMesa> {
            throw new RuntimeException(ex);
         } 
     }
+    
+     public void excluirID(int id) {
+        String sql = "DELETE FROM Mesa WHERE idMesa = ?";
+        
+        try
+        {
+            if(this.conexao.conectar())
+            {
+                PreparedStatement sentenca = this.conexao.getConnection().prepareStatement(sql);
+                
+                sentenca.setInt(1, id);
+                
+                sentenca.execute();
+                sentenca.close();
+                this.conexao.getConnection().close();
+            }
+        }
+        catch(SQLException ex)
+        {
+           throw new RuntimeException(ex);
+        }
+    }
 
     @Override
     public ArrayList<modeloMesa> dashboard() {
