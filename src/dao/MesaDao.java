@@ -136,6 +136,32 @@ public class MesaDao implements DaoGenerica<modeloMesa> {
            throw new RuntimeException(ex);
         }
     }
+     
+     
+  public String obterFuncionarioMaisAtivo() {
+    String sql = "SELECT funcionario, COUNT(*) AS total FROM Mesa " +
+                 "GROUP BY funcionario " +
+                 "ORDER BY total DESC " +
+                 "LIMIT 1";
+
+    try {
+        if (this.conexao.conectar()) {
+            PreparedStatement stmt = this.conexao.getConnection().prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString("funcionario");
+            }
+            stmt.close();
+            this.conexao.getConnection().close();
+        }
+    } catch (SQLException ex) {
+        throw new RuntimeException(ex);
+    }
+    return "Nenhum funcionário encontrado";
+}
+     
+     
+     
 
     @Override
     public ArrayList<modeloMesa> dashboard() {
@@ -145,3 +171,5 @@ public class MesaDao implements DaoGenerica<modeloMesa> {
     }
     
 }
+
+

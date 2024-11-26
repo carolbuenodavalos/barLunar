@@ -4,6 +4,20 @@
  */
 package Telas;
 
+import dao.MesaDao;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+
 /**
  *
  * @author marcu
@@ -122,8 +136,8 @@ public class DashBoard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        CadastroDao cadastroDao = new CadastroDao();
-        atualizaDash(cadastroDao);
+        MesaDao mesaDao = new MesaDao();
+        atualizaDash(mesaDao);
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -161,7 +175,7 @@ public class DashBoard extends javax.swing.JFrame {
         });
     }
     
-    private void atualizaDash(CadastroDao cadastroDao)
+    private void atualizaDash(MesaDao cadastroDao)
     {
         new Thread(){
            @Override public void run(){
