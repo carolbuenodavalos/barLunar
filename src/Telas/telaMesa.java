@@ -38,6 +38,8 @@ public class telaMesa extends javax.swing.JFrame {
      */
     public telaMesa() {
         initComponents();
+        getContentPane().setBackground(new java.awt.Color(39, 52, 105));
+
     }
 
     /**
@@ -193,6 +195,11 @@ public class telaMesa extends javax.swing.JFrame {
         TabelaPedidos.setColumns(20);
         TabelaPedidos.setRows(5);
         TabelaPedidos.setFocusable(false);
+        TabelaPedidos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabelaPedidosMouseClicked(evt);
+            }
+        });
         jScrollPane6.setViewportView(TabelaPedidos);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -362,6 +369,7 @@ public class telaMesa extends javax.swing.JFrame {
     private void botaoSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoSalvarMouseClicked
         processarPedido();
         salvarInformacoes();
+        reabreMesa();
     }//GEN-LAST:event_botaoSalvarMouseClicked
 
     private void Tb01MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tb01MouseClicked
@@ -395,6 +403,10 @@ public class telaMesa extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         imprimirNota();
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void TabelaPedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaPedidosMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TabelaPedidosMouseClicked
 
 private void salvarInformacoes() {
    if (ComboMesa.getSelectedItem() == null || statusMesa.getSelectedItem() == null || CampoFunc.getSelectedItem() == null) {
@@ -636,6 +648,15 @@ private void salvarInformacoes() {
             JOptionPane.showMessageDialog(null, "Selecione um Cadastro para excluir!");
         }
     }
+    
+    private void reabreMesa() {
+    
+            telaMesa frameTelaMesa = new telaMesa();
+            frameTelaMesa.setVisible(true);
+            this.dispose();
+            
+            
+    }       
     /**
      * @param args the command line arguments
      */
@@ -668,7 +689,11 @@ private void salvarInformacoes() {
             public void run() {
                 new telaMesa().setVisible(true);
             }
+            
+            
         });
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

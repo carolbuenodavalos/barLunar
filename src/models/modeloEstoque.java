@@ -18,7 +18,7 @@ public class modeloEstoque {
     
     
  public modeloEstoque(){
- }
+ }  
  
  public modeloEstoque(int idProduto, String nomeProduto, int qtdProduto, int idCategoriaProduto, String descricaoProduto, float preço ){
      this.idProduto = idProduto;

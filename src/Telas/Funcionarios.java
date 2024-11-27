@@ -21,6 +21,8 @@ public class Funcionarios extends javax.swing.JFrame {
      */
     public Funcionarios() {
         initComponents();
+        getContentPane().setBackground(new java.awt.Color(39, 52, 105));
+
     }
 
     /**

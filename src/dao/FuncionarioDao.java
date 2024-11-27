@@ -45,6 +45,25 @@ public class FuncionarioDao implements DaoGenerica<modeloFuncionario>{
         }
     }
     
+    public int consultaPorNome(String nome) {
+    String sql = "SELECT idFuncionario FROM Funcionario WHERE nomeFunc = ?";
+    try {
+        if (this.conexao.conectar()) {
+            PreparedStatement sentenca = this.conexao.getConnection().prepareStatement(sql);
+            sentenca.setString(1, nome);
+            ResultSet resultadoSentenca = sentenca.executeQuery();
+            if (resultadoSentenca.next()) {
+                return resultadoSentenca.getInt("idFuncionario");
+            }
+            sentenca.close();
+            this.conexao.getConnection().close();
+        }
+    } catch (SQLException ex) {
+        throw new RuntimeException("Erro ao obter ID do funcionário: " + ex.getMessage(), ex);
+    }
+    return -1; // Caso não encontre
+}
+
     public ArrayList<modeloFuncionario> consultar() {
          ArrayList<modeloFuncionario> comboboxfuncionario = new ArrayList<modeloFuncionario>();
         String sql = "SELECT idFuncionario, nomeFuncionario FROM Funcionario ORDER BY nomeFuncionario";
