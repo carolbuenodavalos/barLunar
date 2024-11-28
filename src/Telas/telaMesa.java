@@ -326,7 +326,7 @@ public class telaMesa extends javax.swing.JFrame {
         this.CampoFunc.setSelectedIndex(-1);
     }
     
-    private void atualizarFuncionario(FuncionarioDao DaoFunc){
+    void atualizarFuncionario(FuncionarioDao DaoFunc){
         try{
               limparFunc();
               ArrayList<modeloFuncionario> listarFunc;
@@ -583,7 +583,7 @@ private void salvarInformacoes() {
     frame.setVisible(true);
     }
 
-    private void atualizaTabela(EstoqueDao cadastroPDao){
+    void atualizaTabela(EstoqueDao cadastroPDao){
         try{
                     limparTabela();
 
@@ -602,7 +602,7 @@ private void salvarInformacoes() {
      
     }
     
-     private void atualizaMesas(MesaDao cadastroPDao){
+     void atualizaMesas(MesaDao cadastroPDao){
         try{
                     limparMesas();
 

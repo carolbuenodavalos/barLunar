@@ -433,7 +433,7 @@ public class Estoque extends javax.swing.JFrame {
         }
     }
     
-    private void atualizaTabela(EstoqueDao cadastroPDao){
+    void atualizaTabela(EstoqueDao cadastroPDao){
         try{
                     limparTabela();
 

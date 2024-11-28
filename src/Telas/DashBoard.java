@@ -110,7 +110,7 @@ public class DashBoard extends javax.swing.JFrame {
         });
     }
     
-    private void atualizaDash(MesaDao cadastroDao) {
+    void atualizaDash(MesaDao cadastroDao) {
     new Thread() {
         @Override public void run() {
             while (true) {
