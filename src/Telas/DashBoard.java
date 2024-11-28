@@ -43,7 +43,6 @@ public class DashBoard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         panel1 = new java.awt.Panel();
         PainelPizzaPedido = new javax.swing.JPanel();
 
@@ -54,9 +53,6 @@ public class DashBoard extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setText("Pedidos mais feitos");
-
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
@@ -65,7 +61,7 @@ public class DashBoard extends javax.swing.JFrame {
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 718, Short.MAX_VALUE)
         );
 
         PainelPizzaPedido.setBackground(new java.awt.Color(255, 255, 204));
@@ -76,26 +72,19 @@ public class DashBoard extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jLabel1)
-                .addGap(112, 112, 112)
+                .addContainerGap(349, Short.MAX_VALUE)
                 .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PainelPizzaPedido, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(20, 20, 20)
+                .addComponent(PainelPizzaPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(PainelPizzaPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGap(23, 23, 23)
+                .addComponent(PainelPizzaPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -110,27 +99,7 @@ public class DashBoard extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DashBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DashBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DashBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DashBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+       
         //</editor-fold>
 
         /* Create and display the form */
@@ -153,19 +122,24 @@ public class DashBoard extends javax.swing.JFrame {
                     DefaultPieDataset pizzaChartData = new DefaultPieDataset();
                     
                     for (modeloMesa cadastro : listaCadastros) {
-                        // Atualize os valores com os nomes dos funcionários e suas contagens
+                        // Adiciona dados ao gráfico pizza
+                        System.out.println("Adicionando ao gráfico: " + cadastro.getFuncionario() + " - " + cadastro.getNumFunc());
                         pizzaChartData.setValue(cadastro.getFuncionario(), cadastro.getNumFunc());
                     }
 
                     // Cria e atualiza o gráfico de pizza
-                    JFreeChart pizzaChart = ChartFactory.createPieChart("Funcionarios mais Ativos", pizzaChartData);
+                    JFreeChart pizzaChart = ChartFactory.createPieChart("Funcionarios mais ativos", pizzaChartData);
                     PiePlot pizzachrt = (PiePlot) pizzaChart.getPlot();
                     ChartPanel ChartPizza = new ChartPanel(pizzaChart);
+
+                    // Atualiza o painel gráfico
                     PainelPizzaPedido.removeAll();
+                    PainelPizzaPedido.setLayout(new BorderLayout()); // Configura o layout
                     PainelPizzaPedido.add(ChartPizza, BorderLayout.CENTER);
                     PainelPizzaPedido.validate();
+                    PainelPizzaPedido.repaint(); // Garante que o painel seja atualizado
 
-                    Thread.sleep(1000); // Intervalo de 10 segundos (ajuste conforme necessário)
+                    Thread.sleep(5000); // Intervalo de 10 segundos (ajuste conforme necessário)
 
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado:\n" + ex.getMessage(), "ERRO!", ERROR_MESSAGE);
@@ -175,6 +149,7 @@ public class DashBoard extends javax.swing.JFrame {
     }.start();
 }
 
+
     
     
     
@@ -182,7 +157,6 @@ public class DashBoard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PainelPizzaPedido;
-    private javax.swing.JLabel jLabel1;
     private java.awt.Panel panel1;
     // End of variables declaration//GEN-END:variables
 }

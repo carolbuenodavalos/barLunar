@@ -181,6 +181,8 @@ public class MesaDao implements DaoGenerica<modeloMesa> {
                 cadastro.setFuncionario(resultadoSentenca.getString("funcionario"));
                 cadastro.setNumFunc(resultadoSentenca.getInt("numcad"));
                 
+                System.out.println("Funcionario: " + cadastro.getFuncionario() + ", NumFunc: " + cadastro.getNumFunc());
+
                 ListarDashBoard.add(cadastro);
             }
 
@@ -193,6 +195,7 @@ public class MesaDao implements DaoGenerica<modeloMesa> {
         throw new RuntimeException(ex);
     }
 }
+
 
     
 }
