@@ -394,6 +394,32 @@ public class telaMesa extends javax.swing.JFrame {
         atualizaTabela(estoqueAtt);
         MesaDao attmesa = new MesaDao();
         atualizaMesas(attmesa);
+        
+        
+        new Thread(){
+           @Override public void run(){
+              while (true){
+                try
+                {
+                    FuncionarioDao DaoFunc = new FuncionarioDao();
+                    atualizarFuncionario(DaoFunc);
+                    EstoqueDao estoqueAtt = new EstoqueDao();
+                    atualizaTabela(estoqueAtt);
+                    MesaDao attmesa = new MesaDao();
+                    atualizaMesas(attmesa);
+                   
+
+                    
+                    Thread.sleep(10);
+
+                }
+                catch(Exception ex)
+                {
+                    JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado:\n" + ex.getMessage(), "ERRO!", ERROR_MESSAGE);
+                }
+              }   
+           }
+        }.start();  
     }//GEN-LAST:event_formWindowOpened
 
     private void TabelaCardapioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TabelaCardapioFocusLost

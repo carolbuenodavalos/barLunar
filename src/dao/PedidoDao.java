@@ -201,7 +201,6 @@ public class PedidoDao implements DaoGenerica<modeloPedido>{
     }
     
 
-    @Override
     public ArrayList<modeloPedido> dashboard() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }

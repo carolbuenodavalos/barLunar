@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import models.modeloFuncionario;
 import dao.DaoGenerica;
+import models.modeloMesa;
 
 /**
  *
@@ -97,37 +98,48 @@ public class FuncionarioDao implements DaoGenerica<modeloFuncionario>{
         }
     }
     
-//    public ArrayList<modeloFuncionario> dashboard() {
-//        ArrayList<modeloFuncionario> ListarDashBoard = new ArrayList<modeloFuncionario>();
-//        String sql = "select count(id) as numcad, count(id)*2 as sumcad from AgendaContatos;";
-//        
-//        try
-//        {
-//            if(this.conexao.conectar())
-//            {
-//                PreparedStatement sentenca = this.conexao.getConnection().prepareStatement(sql);
-//                
-//                 ResultSet resultadoSentenca = sentenca.executeQuery();
-//
-//                while(resultadoSentenca.next()) 
-//                {
-//                    modeloFuncionario cadastro = new modeloFuncionario();
-//                    cadastro.setNome(resultadoSentenca.getString("numcad"));
-//                    
-//                    ListarDashBoard.add(cadastro);
-//                }
-//
-//                sentenca.close();
-//                this.conexao.getConnection().close();
-//            }
-//            
-//            return ListarDashBoard;
-//        }
-//        catch(SQLException ex)
-//        {
-//           throw new RuntimeException(ex);
-//        } 
-//    } 
+    /**
+     *
+     * @return
+     */
+    public ArrayList<modeloMesa> dashboard() {
+        
+        ArrayList<modeloMesa> ListarDashBoard = new ArrayList<modeloMesa>();
+//        String sql = "select count(idcad) as numcad, count(idcad)*2 as sumcad, (select count(idsexo)+100 from cadsexo) as numsexualidade from cadbasico;";
+        String sql = "select count(id) as funcionario, count(id)*2 as sumcad from Mesa";
+        
+        try
+        {
+            if(this.conexao.conectar())
+            {
+                PreparedStatement sentenca = this.conexao.getConnection().prepareStatement(sql);
+                
+                //recebe o resultado da consulta
+                 ResultSet resultadoSentenca = sentenca.executeQuery();
+
+                //percorrer cada linha do resultado
+                while(resultadoSentenca.next()) 
+                {
+                    //resgata o valor de cada linha, selecionando pelo nome de cada coluna da tabela Escola
+                    modeloMesa cadastro = new modeloMesa();
+                    cadastro.setFuncionario(resultadoSentenca.getString("numcad"));
+                    //cadastro.SetSomaCodigos(resultadoSentenca.getInt("sumcad"));
+                    //cadastro.SetNumSexualidade(resultadoSentenca.getInt("numsexualidade"));
+                    
+                    ListarDashBoard.add(cadastro);
+                }
+
+                sentenca.close();
+                this.conexao.getConnection().close();
+            }
+            
+            return ListarDashBoard;
+        }
+        catch(SQLException ex)
+        {
+           throw new RuntimeException(ex);
+        }
+    }
     
     @Override
     public void excluir() {
@@ -139,8 +151,5 @@ public class FuncionarioDao implements DaoGenerica<modeloFuncionario>{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
-    public ArrayList<modeloFuncionario> dashboard() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+   
 }

@@ -14,17 +14,27 @@ package models;
     private String statusMesa;
     private String funcionario;
     private String Pedido;
+    private int numFunc;
     
    public modeloMesa(){
    }
    
-   public modeloMesa(int idMesa, String mesa, String statusMesa, String funcionario, String Pedido){
+   public modeloMesa(int idMesa, String mesa, String statusMesa, String funcionario, String Pedido,int numFunc){
        this.idMesa = idMesa;
        this.mesa = mesa;
        this.statusMesa = statusMesa;
        this.funcionario = funcionario;
        this.Pedido = Pedido;
+       this.numFunc=numFunc;
    }
+
+    public int getNumFunc() {
+        return numFunc;
+    }
+
+    public void setNumFunc(int numFunc) {
+        this.numFunc = numFunc;
+    }
 
     public int getIdMesa() {
         return idMesa;

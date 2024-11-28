@@ -9,6 +9,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import models.modeloFuncionario;
+import models.modeloMesa;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -41,10 +44,8 @@ public class DashBoard extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         panel1 = new java.awt.Panel();
-        PainelPizzaPedido = new java.awt.Panel();
-        PainelBarraFunc = new java.awt.Panel();
+        PainelPizzaPedido = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -55,9 +56,6 @@ public class DashBoard extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Pedidos mais feitos");
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setText("Funcionario mais ativo");
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
@@ -70,66 +68,34 @@ public class DashBoard extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout PainelPizzaPedidoLayout = new javax.swing.GroupLayout(PainelPizzaPedido);
-        PainelPizzaPedido.setLayout(PainelPizzaPedidoLayout);
-        PainelPizzaPedidoLayout.setHorizontalGroup(
-            PainelPizzaPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 264, Short.MAX_VALUE)
-        );
-        PainelPizzaPedidoLayout.setVerticalGroup(
-            PainelPizzaPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 239, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout PainelBarraFuncLayout = new javax.swing.GroupLayout(PainelBarraFunc);
-        PainelBarraFunc.setLayout(PainelBarraFuncLayout);
-        PainelBarraFuncLayout.setHorizontalGroup(
-            PainelBarraFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 265, Short.MAX_VALUE)
-        );
-        PainelBarraFuncLayout.setVerticalGroup(
-            PainelBarraFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 232, Short.MAX_VALUE)
-        );
+        PainelPizzaPedido.setBackground(new java.awt.Color(255, 255, 204));
+        PainelPizzaPedido.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(PainelPizzaPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
+                .addComponent(jLabel1)
+                .addGap(112, 112, 112)
                 .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PainelBarraFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(16, 16, 16)))
-                .addGap(32, 32, 32))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(PainelPizzaPedido, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
-                        .addComponent(jLabel1)
-                        .addGap(25, 25, 25)
-                        .addComponent(PainelPizzaPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel2)
-                        .addGap(20, 20, 20)
-                        .addComponent(PainelBarraFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(45, Short.MAX_VALUE))
-            .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(41, 41, 41)
+                        .addComponent(PainelPizzaPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
@@ -175,85 +141,48 @@ public class DashBoard extends javax.swing.JFrame {
         });
     }
     
-    private void atualizaDash(MesaDao cadastroDao)
-    {
-        new Thread(){
-           @Override public void run(){
-              while (true){
-                try
-                {
-
-                    ArrayList<Cadastro> listaCadastros;
-                    listaCadastros = cadastroDao.dashboard(); 
+    private void atualizaDash(MesaDao cadastroDao) {
+    new Thread() {
+        @Override public void run() {
+            while (true) {
+                try {
+                    ArrayList<modeloMesa> listaCadastros;
+                    listaCadastros = cadastroDao.dashboard();
                     
                     DefaultCategoryDataset barChartData = new DefaultCategoryDataset();
-                    
                     DefaultPieDataset pizzaChartData = new DefaultPieDataset();
                     
-                    for(Cadastro cadastro : listaCadastros)
-                    {
-                         jlblNumCadastros.setText(Integer.toString(cadastro.getTotalCadastros()));
-                         jlblSoma.setText(Integer.toString(cadastro.getSomaCodigos()));
-                         jlblNumSexualidade.setText(Integer.toString(cadastro.getNumSexualidade()));
-
-                         
-
-                        // Adiciona dados ao gráfico de barras
-                         barChartData.setValue(cadastro.getTotalCadastros(), "Núm Cadastros", "Núm Cadastros");
-                         barChartData.setValue(cadastro.getSomaCodigos(), "Soma dos Códigos", "Soma dos Códigos");
-                         barChartData.setValue(cadastro.getNumSexualidade(), "Núm Sexualidades", "Núm Sexualidades");    
-                        
-
-
-
-                        // Adiciona dados ao gráfico pizza
-                         pizzaChartData.setValue("Núm Cadastros", cadastro.getTotalCadastros());
-                         pizzaChartData.setValue("Soma dos Códigos", cadastro.getSomaCodigos());
-                         pizzaChartData.setValue("Núm Sexualidades", cadastro.getNumSexualidade());    
-
-
+                    for (modeloMesa cadastro : listaCadastros) {
+                        // Atualize os valores com os nomes dos funcionários e suas contagens
+                        pizzaChartData.setValue(cadastro.getFuncionario(), cadastro.getNumFunc());
                     }
-                    //Gráfico em barras
-                    JFreeChart barChart = ChartFactory.createBarChart("Ex Barras", "Dados", "Valores", barChartData, 
-                            PlotOrientation.VERTICAL, true, true, false);
-                    CategoryPlot barchrt = barChart.getCategoryPlot();
-                    barchrt.setRangeGridlinePaint(new Color(140,105,204));
-                    ChartPanel ChartP = new ChartPanel(barChart);
-                    PainelBarraFunc.removeAll();
-                    PainelBarraFunc.add(ChartP,BorderLayout.CENTER);
-                    PainelBarraFunc.validate();
 
-                    //Gráfico em pizza
-                    JFreeChart pizzaChart = ChartFactory.createPieChart("Ex: Pizza", pizzaChartData);
-                    PiePlot pizzachrt = (PiePlot)pizzaChart.getPlot();
+                    // Cria e atualiza o gráfico de pizza
+                    JFreeChart pizzaChart = ChartFactory.createPieChart("Funcionarios mais Ativos", pizzaChartData);
+                    PiePlot pizzachrt = (PiePlot) pizzaChart.getPlot();
                     ChartPanel ChartPizza = new ChartPanel(pizzaChart);
                     PainelPizzaPedido.removeAll();
-                    PainelPizzaPedido.add(ChartPizza,BorderLayout.CENTER);
+                    PainelPizzaPedido.add(ChartPizza, BorderLayout.CENTER);
                     PainelPizzaPedido.validate();
 
+                    Thread.sleep(1000); // Intervalo de 10 segundos (ajuste conforme necessário)
 
-                    
-                    Thread.sleep(3000);
-
-                }
-                catch(Exception ex)
-                {
+                } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado:\n" + ex.getMessage(), "ERRO!", ERROR_MESSAGE);
                 }
-              }   
-           }
-        }.start();   
-    }
+            }
+        }
+    }.start();
+}
+
     
     
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.Panel PainelBarraFunc;
-    private java.awt.Panel PainelPizzaPedido;
+    private javax.swing.JPanel PainelPizzaPedido;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private java.awt.Panel panel1;
     // End of variables declaration//GEN-END:variables
 }
