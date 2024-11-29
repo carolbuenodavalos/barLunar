@@ -94,12 +94,16 @@ public class telaMesa extends javax.swing.JFrame {
         });
 
         CampoID.setEditable(false);
+        CampoID.setBackground(new java.awt.Color(153, 153, 153));
+        CampoID.setForeground(new java.awt.Color(255, 255, 255));
+        CampoID.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         CampoID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CampoIDActionPerformed(evt);
             }
         });
 
+        labelIdMesa.setForeground(new java.awt.Color(255, 255, 255));
         labelIdMesa.setText("Id Mesa");
 
         ComboMesa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mesa 1", "Mesa 2", "Mesa 3", "Mesa 4", "Mesa 5" }));
@@ -110,6 +114,7 @@ public class telaMesa extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Mesa");
 
         statusMesa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ocupada", "Livre", "A Pagar" }));
@@ -119,6 +124,7 @@ public class telaMesa extends javax.swing.JFrame {
             }
         });
 
+        labelStatusMesa.setForeground(new java.awt.Color(255, 255, 255));
         labelStatusMesa.setText("Status Mesa");
 
         Tb01.setModel(new javax.swing.table.DefaultTableModel(
@@ -160,12 +166,15 @@ public class telaMesa extends javax.swing.JFrame {
         CampoFunc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Robo 1", "Robo 2", "Ze" }));
         CampoFunc.setSelectedIndex(-1);
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Funcionario");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Mesa");
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Cardápio");
 
         TabelaCardapio.setModel(new javax.swing.table.DefaultTableModel(
@@ -203,6 +212,7 @@ public class telaMesa extends javax.swing.JFrame {
         jScrollPane6.setViewportView(TabelaPedidos);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Pedidos");
 
         jButton1.setText("Imprimir");

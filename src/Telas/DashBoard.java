@@ -44,6 +44,7 @@ public class DashBoard extends javax.swing.JFrame {
     private void initComponents() {
 
         panel1 = new java.awt.Panel();
+        PainelPizzaFuncionario = new javax.swing.JPanel();
         PainelPizzaPedido = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -61,10 +62,13 @@ public class DashBoard extends javax.swing.JFrame {
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 718, Short.MAX_VALUE)
+            .addGap(0, 371, Short.MAX_VALUE)
         );
 
-        PainelPizzaPedido.setBackground(new java.awt.Color(255, 255, 204));
+        PainelPizzaFuncionario.setBackground(new java.awt.Color(255, 255, 255));
+        PainelPizzaFuncionario.setLayout(new java.awt.BorderLayout());
+
+        PainelPizzaPedido.setBackground(new java.awt.Color(255, 255, 255));
         PainelPizzaPedido.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -72,18 +76,25 @@ public class DashBoard extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(349, Short.MAX_VALUE)
-                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addContainerGap(16, Short.MAX_VALUE)
                 .addComponent(PainelPizzaPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(PainelPizzaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(PainelPizzaPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(PainelPizzaPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(PainelPizzaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -92,7 +103,7 @@ public class DashBoard extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         MesaDao mesaDao = new MesaDao();
-        atualizaDash(mesaDao);
+        atualizaDashFuncionario(mesaDao);
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -110,7 +121,7 @@ public class DashBoard extends javax.swing.JFrame {
         });
     }
     
-    void atualizaDash(MesaDao cadastroDao) {
+    void atualizaDashFuncionario(MesaDao cadastroDao) {
     new Thread() {
         @Override public void run() {
             while (true) {
@@ -122,8 +133,6 @@ public class DashBoard extends javax.swing.JFrame {
                     DefaultPieDataset pizzaChartData = new DefaultPieDataset();
                     
                     for (modeloMesa cadastro : listaCadastros) {
-                        // Adiciona dados ao gráfico pizza
-                        System.out.println("Adicionando ao gráfico: " + cadastro.getFuncionario() + " - " + cadastro.getNumFunc());
                         pizzaChartData.setValue(cadastro.getFuncionario(), cadastro.getNumFunc());
                     }
 
@@ -133,11 +142,11 @@ public class DashBoard extends javax.swing.JFrame {
                     ChartPanel ChartPizza = new ChartPanel(pizzaChart);
 
                     // Atualiza o painel gráfico
-                    PainelPizzaPedido.removeAll();
-                    PainelPizzaPedido.setLayout(new BorderLayout()); // Configura o layout
-                    PainelPizzaPedido.add(ChartPizza, BorderLayout.CENTER);
-                    PainelPizzaPedido.validate();
-                    PainelPizzaPedido.repaint(); // Garante que o painel seja atualizado
+                    PainelPizzaFuncionario.removeAll();
+                    PainelPizzaFuncionario.setLayout(new BorderLayout()); // Configura o layout
+                    PainelPizzaFuncionario.add(ChartPizza, BorderLayout.CENTER);
+                    PainelPizzaFuncionario.validate();
+                    PainelPizzaFuncionario.repaint(); // Garante que o painel seja atualizado
 
                     Thread.sleep(5000); // Intervalo de 10 segundos (ajuste conforme necessário)
 
@@ -148,6 +157,43 @@ public class DashBoard extends javax.swing.JFrame {
         }
     }.start();
 }
+    
+     void atualizaDashPedido(MesaDao cadastroDao) {
+            new Thread() {
+                @Override public void run() {
+                    while (true) {
+                        try {
+                            ArrayList<modeloMesa> listaCadastros;
+                            listaCadastros = cadastroDao.dashboard();
+
+                            DefaultCategoryDataset barChartData = new DefaultCategoryDataset();
+                            DefaultPieDataset pizzaChartData = new DefaultPieDataset();
+
+                            for (modeloMesa cadastro : listaCadastros) {
+                                pizzaChartData.setValue(cadastro.getFuncionario(), cadastro.getNumFunc());
+                            }
+
+                            // Cria e atualiza o gráfico de pizza
+                            JFreeChart pizzaChart = ChartFactory.createPieChart("Pedidos mais feitos", pizzaChartData);
+                            PiePlot pizzachrt = (PiePlot) pizzaChart.getPlot();
+                            ChartPanel ChartPizza = new ChartPanel(pizzaChart);
+
+                            // Atualiza o painel gráfico
+                            PainelPizzaPedido.removeAll();
+                            PainelPizzaPedido.setLayout(new BorderLayout()); // Configura o layout
+                            PainelPizzaPedido.add(ChartPizza, BorderLayout.CENTER);
+                            PainelPizzaPedido.validate();
+                            PainelPizzaPedido.repaint(); // Garante que o painel seja atualizado
+
+                            Thread.sleep(5000); // Intervalo de 10 segundos (ajuste conforme necessário)
+
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado:\n" + ex.getMessage(), "ERRO!", ERROR_MESSAGE);
+                        }
+                    }
+                }
+            }.start();
+        }
 
 
     
@@ -156,6 +202,7 @@ public class DashBoard extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PainelPizzaFuncionario;
     private javax.swing.JPanel PainelPizzaPedido;
     private java.awt.Panel panel1;
     // End of variables declaration//GEN-END:variables

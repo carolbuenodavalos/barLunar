@@ -141,15 +141,33 @@ public class FuncionarioDao implements DaoGenerica<modeloFuncionario>{
         }
     }
     
+     public void alterar(modeloFuncionario cadastro) {
+        String sql = "UPDATE Funcionario SET nomeFuncionario = ? WHERE idFuncionario = ?";
+        
+        try
+        {
+            if(this.conexao.conectar())
+            {
+                PreparedStatement sentenca = this.conexao.getConnection().prepareStatement(sql); 
+                sentenca.setString(1,cadastro.getNomeFunc()); 
+                sentenca.setInt(2, cadastro.getIdFunc());
+                sentenca.execute();
+                sentenca.close();
+                this.conexao.getConnection().close();
+            }
+        }
+        catch(SQLException ex)
+        {
+           throw new RuntimeException(ex);
+        }
+    }
+     
     @Override
     public void excluir() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
-    public void alterar(modeloFuncionario objt) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 
    
 }

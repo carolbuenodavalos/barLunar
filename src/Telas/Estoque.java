@@ -102,16 +102,19 @@ public class Estoque extends javax.swing.JFrame {
         CampoNome.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Nome do Produto");
 
         CampoPreco.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Preço");
 
         CampoQuantidade.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel4.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Quantidade");
 
         TabelaEstoque.setModel(new javax.swing.table.DefaultTableModel(
@@ -158,6 +161,7 @@ public class Estoque extends javax.swing.JFrame {
             }
         });
 
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Descrição");
 
         CampoDesc.setBackground(new java.awt.Color(255, 255, 255));
@@ -169,8 +173,10 @@ public class Estoque extends javax.swing.JFrame {
         });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Estoque");
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("ID");
 
         CampoID.setEditable(false);
@@ -184,6 +190,7 @@ public class Estoque extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Imprimir Estoque");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -63,7 +63,8 @@ public class jTabbedTelas extends javax.swing.JFrame {
                     telaEstoque.atualizaTabela(new dao.EstoqueDao()); // Atualizar a tabela do estoque
                 }
                 case 2 -> { // Aba Funcionários
-                    // Adicione lógica para atualizar a aba de Funcionários, se necessário
+                    telaFuncionarios.atualizaDashFuncionario(new dao.MesaDao());
+                    telaFuncionarios.atualizarFuncionario(new dao.FuncionarioDao());
                 }
                 case 3 -> {
                  System.out.println("Carregando dados da mesa...");
@@ -74,7 +75,7 @@ public class jTabbedTelas extends javax.swing.JFrame {
                 case 4 -> {
                     
                  System.out.println("Carregando dados do DashBoard...");
-                 DashBoard.atualizaDash(new dao.MesaDao());
+                 DashBoard.atualizaDashFuncionario(new dao.MesaDao());
 
                   
                 }
