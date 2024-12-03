@@ -170,13 +170,10 @@ public class MesaDao implements DaoGenerica<modeloMesa> {
     try {
         if (this.conexao.conectar()) {
             PreparedStatement sentenca = this.conexao.getConnection().prepareStatement(sql);
-            
-            // Recebe o resultado da consulta
+
             ResultSet resultadoSentenca = sentenca.executeQuery();
 
-            // Percorre cada linha do resultado
             while (resultadoSentenca.next()) {
-                // Resgata o valor de cada linha, selecionando pelo nome de cada coluna da tabela Mesa
                 modeloMesa cadastro = new modeloMesa();
                 cadastro.setFuncionario(resultadoSentenca.getString("funcionario"));
                 cadastro.setNumFunc(resultadoSentenca.getInt("numcad"));

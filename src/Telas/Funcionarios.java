@@ -12,7 +12,6 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.table.DefaultTableModel;
-import models.modeloEstoque;
 import models.modeloFuncionario;
 import models.modeloMesa;
 import org.jfree.chart.ChartFactory;
@@ -202,7 +201,6 @@ public class Funcionarios extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado:\n" + ex.getMessage(), "ERRO!", ERROR_MESSAGE);
                 }
             } else {
-                // Atualizar o registro
                 modeloFuncionario cadastroP = new modeloFuncionario();
                 cadastroP.setIdFunc(Integer.parseInt(CampoID.getText()));
                 cadastroP.setNomeFunc(CampoNome.getText());
@@ -213,7 +211,7 @@ public class Funcionarios extends javax.swing.JFrame {
                 limparCampos();
                 JOptionPane.showMessageDialog(null, "Cadastro de Funcionário alterado com sucesso!", "", INFORMATION_MESSAGE);
 
-                finalizarEdicao(); // Finaliza o modo de edição
+                finalizarEdicao(); 
             }
         }
     }//GEN-LAST:event_butaoSalvarMouseClicked
@@ -228,11 +226,9 @@ public class Funcionarios extends javax.swing.JFrame {
 
     private void TabelaNomeFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaNomeFuncionarioMouseClicked
     if ((TabelaNomeFuncionario.getSelectedRow() != -1) && (evt.getClickCount() == 2)) {
-          // Preenche os campos com os valores da linha selecionada
           CampoID.setText(TabelaNomeFuncionario.getValueAt(TabelaNomeFuncionario.getSelectedRow(), 0).toString());
           CampoNome.setText(TabelaNomeFuncionario.getValueAt(TabelaNomeFuncionario.getSelectedRow(), 1).toString());
 
-          // Entra no modo de edição
           contador = 1;
           butaoSalvar.setText("Alterar");
       }  
@@ -257,15 +253,14 @@ public class Funcionarios extends javax.swing.JFrame {
     }
     
     private void finalizarEdicao() {
-    contador = 0; // Sai do modo de edição
-    TabelaNomeFuncionario.setEnabled(true); // Reativa a tabela
-    butaoSalvar.setText("Salvar"); // Altera o texto do botão para "Salvar"
-    limparCampos(); // Limpa os campos
+    contador = 0; 
+    TabelaNomeFuncionario.setEnabled(true); 
+    butaoSalvar.setText("Salvar"); 
+    limparCampos();
 }
 
     
     private void limparTabela(){
-        //percorre a tabela e exclui todas as linhas
         while(TabelaNomeFuncionario.getRowCount() > 0){
             DefaultTableModel dm = (DefaultTableModel) TabelaNomeFuncionario.getModel();
             dm.getDataVector().removeAllElements();
@@ -287,19 +282,17 @@ public class Funcionarios extends javax.swing.JFrame {
                         pizzaChartData.setValue(cadastro.getFuncionario(), cadastro.getNumFunc());
                     }
 
-                    // Cria e atualiza o gráfico de pizza
                     JFreeChart pizzaChart = ChartFactory.createPieChart("Funcionarios mais ativos", pizzaChartData);
                     PiePlot pizzachrt = (PiePlot) pizzaChart.getPlot();
                     ChartPanel ChartPizza = new ChartPanel(pizzaChart);
 
-                    // Atualiza o painel gráfico
                     PainelPizzaFuncionario.removeAll();
-                    PainelPizzaFuncionario.setLayout(new BorderLayout()); // Configura o layout
+                    PainelPizzaFuncionario.setLayout(new BorderLayout()); 
                     PainelPizzaFuncionario.add(ChartPizza, BorderLayout.CENTER);
                     PainelPizzaFuncionario.validate();
-                    PainelPizzaFuncionario.repaint(); // Garante que o painel seja atualizado
+                    PainelPizzaFuncionario.repaint(); 
 
-                    Thread.sleep(5000); // Intervalo de 10 segundos (ajuste conforme necessário)
+                    Thread.sleep(5000);
 
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado:\n" + ex.getMessage(), "ERRO!", ERROR_MESSAGE);

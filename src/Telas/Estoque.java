@@ -249,7 +249,6 @@ public class Estoque extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
                         .addGap(28, 28, 28)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -258,7 +257,7 @@ public class Estoque extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(butaoLimpar)
                 .addGap(14, 14, 14)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(butaoExcluir, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -289,7 +288,6 @@ public class Estoque extends javax.swing.JFrame {
             CampoNome.requestFocus();
         } else {
             if (contador == 0) {            
-                // Lógica para adicionar novo item
                 try {    
                     modeloEstoque cadastroP = new modeloEstoque();
                     cadastroP.setNomeProd(CampoNome.getText());
@@ -302,12 +300,10 @@ public class Estoque extends javax.swing.JFrame {
                     limparTabela();
                     atualizaTabela(cadastroPDao);
                     JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso!", "", INFORMATION_MESSAGE);
-                    finalizarEdicao(); // Finaliza a edição após adicionar
+                    finalizarEdicao();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado:\n" + ex.getMessage(), "ERRO!", ERROR_MESSAGE);
                 }
-            } else {
-                // Lógica para alterar item existente
                 modeloEstoque cadastroP = new modeloEstoque();
                 cadastroP.setIdProd(Integer.parseInt(CampoID.getText()));
                 cadastroP.setNomeProd(CampoNome.getText());
@@ -321,7 +317,7 @@ public class Estoque extends javax.swing.JFrame {
                 atualizaTabela(cadastroPDao);
                 JOptionPane.showMessageDialog(null, "Cadastro alterado com sucesso!", "", INFORMATION_MESSAGE);
 
-                finalizarEdicao(); // Finaliza a edição após alteração
+                finalizarEdicao(); 
             }    
     }
     }//GEN-LAST:event_butaoCadastrarMouseClicked
@@ -344,14 +340,12 @@ public class Estoque extends javax.swing.JFrame {
 
     private void TabelaEstoqueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaEstoqueMouseClicked
         if ((TabelaEstoque.getSelectedRow() != -1) && (evt.getClickCount() == 2)) {
-            // Preenche os campos com os valores da linha selecionada
             CampoID.setText(TabelaEstoque.getValueAt(TabelaEstoque.getSelectedRow(), 0).toString());
             CampoNome.setText(TabelaEstoque.getValueAt(TabelaEstoque.getSelectedRow(), 1).toString());
             CampoPreco.setText(TabelaEstoque.getValueAt(TabelaEstoque.getSelectedRow(), 2).toString());
             CampoQuantidade.setText(TabelaEstoque.getValueAt(TabelaEstoque.getSelectedRow(), 3).toString());
             CampoDesc.setText(TabelaEstoque.getValueAt(TabelaEstoque.getSelectedRow(), 4).toString());
 
-            // Modo de edição
             contador = 1;
             butaoCadastrar.setText("Alterar");
     }
@@ -376,7 +370,6 @@ public class Estoque extends javax.swing.JFrame {
                EstoqueDao deleteitem = new EstoqueDao();
                deleteitem.excluirID(ID);
 
-               // Finaliza qualquer edição em andamento
                finalizarEdicao();
            }
        } else {
@@ -386,8 +379,8 @@ public class Estoque extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-    MessageFormat header = new MessageFormat("testando impressão");
-    MessageFormat footer = new MessageFormat("testando impressão");
+    MessageFormat header = new MessageFormat("Estoque Atual");
+    MessageFormat footer = new MessageFormat("Bar Lunar");
     try{
             HashPrintRequestAttributeSet set = new HashPrintRequestAttributeSet();
             set.add(OrientationRequested.PORTRAIT);
@@ -399,14 +392,14 @@ public class Estoque extends javax.swing.JFrame {
             
 
             
-    }   // TODO add your handling code here:
+    }   
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void finalizarEdicao() {
-    contador = 0; // Sai do modo de edição
-    TabelaEstoque.setEnabled(true); // Reativa a tabela
-    butaoCadastrar.setText("Cadastrar"); // Volta o texto do botão para "Cadastrar"
-    limparCampos(); // Limpa os campos
+    contador = 0; 
+    TabelaEstoque.setEnabled(true); 
+    butaoCadastrar.setText("Cadastrar"); 
+    limparCampos(); 
 }
 
     private void limparCampos(){
@@ -415,10 +408,8 @@ public class Estoque extends javax.swing.JFrame {
         this.CampoPreco.setText("");
         this.CampoQuantidade.setText("");   
         this.CampoDesc.setText("");  
-        //this.CampoCategoria.setSelectedIndex(-1);
         }
     private void limparTabela(){
-        //percorre a tabela e exclui todas as linhas
         while(TabelaEstoque.getRowCount() > 0){
             DefaultTableModel dm = (DefaultTableModel) TabelaEstoque.getModel();
             dm.getDataVector().removeAllElements();

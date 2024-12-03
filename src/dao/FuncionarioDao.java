@@ -62,7 +62,7 @@ public class FuncionarioDao implements DaoGenerica<modeloFuncionario>{
     } catch (SQLException ex) {
         throw new RuntimeException("Erro ao obter ID do funcionário: " + ex.getMessage(), ex);
     }
-    return -1; // Caso não encontre
+    return -1;
 }
 
     public ArrayList<modeloFuncionario> consultar() {
@@ -105,7 +105,6 @@ public class FuncionarioDao implements DaoGenerica<modeloFuncionario>{
     public ArrayList<modeloMesa> dashboard() {
         
         ArrayList<modeloMesa> ListarDashBoard = new ArrayList<modeloMesa>();
-//        String sql = "select count(idcad) as numcad, count(idcad)*2 as sumcad, (select count(idsexo)+100 from cadsexo) as numsexualidade from cadbasico;";
         String sql = "select count(id) as funcionario, count(id)*2 as sumcad from Mesa";
         
         try
@@ -113,18 +112,13 @@ public class FuncionarioDao implements DaoGenerica<modeloFuncionario>{
             if(this.conexao.conectar())
             {
                 PreparedStatement sentenca = this.conexao.getConnection().prepareStatement(sql);
-                
-                //recebe o resultado da consulta
+
                  ResultSet resultadoSentenca = sentenca.executeQuery();
 
-                //percorrer cada linha do resultado
                 while(resultadoSentenca.next()) 
                 {
-                    //resgata o valor de cada linha, selecionando pelo nome de cada coluna da tabela Escola
                     modeloMesa cadastro = new modeloMesa();
                     cadastro.setFuncionario(resultadoSentenca.getString("numcad"));
-                    //cadastro.SetSomaCodigos(resultadoSentenca.getInt("sumcad"));
-                    //cadastro.SetNumSexualidade(resultadoSentenca.getInt("numsexualidade"));
                     
                     ListarDashBoard.add(cadastro);
                 }
