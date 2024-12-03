@@ -8,12 +8,14 @@ import dao.EstoqueDao;
 import dao.FuncionarioDao;
 import dao.MesaDao;
 import dao.PedidoDao;
+import java.awt.Color;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 import javax.print.attribute.standard.OrientationRequested;
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
@@ -21,7 +23,9 @@ import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import models.modeloEstoque;
 import models.modeloFuncionario;
 import models.modeloMesa;
@@ -38,6 +42,7 @@ public class telaMesa extends javax.swing.JFrame {
      */
     public telaMesa() {
         initComponents();
+        tHeader();
         getContentPane().setBackground(new java.awt.Color(39, 52, 105));
 
     }
@@ -53,25 +58,28 @@ public class telaMesa extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        CampoID = new javax.swing.JTextField();
-        labelIdMesa = new javax.swing.JLabel();
-        ComboMesa = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
-        statusMesa = new javax.swing.JComboBox<>();
-        labelStatusMesa = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        Tb01 = new javax.swing.JTable();
-        botaoSalvar = new javax.swing.JButton();
-        CampoFunc = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        TabelaCardapio = new javax.swing.JTable();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        TabelaPedidos = new javax.swing.JTextArea();
+        jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        TabelaPedidos = new javax.swing.JTextArea();
+        botaoSalvar = new javax.swing.JButton();
+        labelStatusMesa = new javax.swing.JLabel();
+        CampoFunc = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        statusMesa = new javax.swing.JComboBox<>();
+        ComboMesa = new javax.swing.JComboBox<>();
+        CampoID = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        labelIdMesa = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        Tb01 = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        TabelaCardapio = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -87,68 +95,42 @@ public class telaMesa extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 600));
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
 
-        CampoID.setEditable(false);
-        CampoID.setBackground(new java.awt.Color(153, 153, 153));
-        CampoID.setForeground(new java.awt.Color(255, 255, 255));
-        CampoID.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        CampoID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CampoIDActionPerformed(evt);
-            }
-        });
+        jPanel1.setBackground(new java.awt.Color(39, 52, 105));
 
-        labelIdMesa.setForeground(new java.awt.Color(255, 255, 255));
-        labelIdMesa.setText("Id Mesa");
+        jLabel4.setFont(new java.awt.Font("Candara Light", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Pedido selecionado:");
 
-        ComboMesa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mesa 1", "Mesa 2", "Mesa 3", "Mesa 4", "Mesa 5" }));
-        ComboMesa.setSelectedIndex(-1);
-        ComboMesa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ComboMesaActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Mesa");
-
-        statusMesa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ocupada", "Livre", "A Pagar" }));
-        statusMesa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                statusMesaActionPerformed(evt);
-            }
-        });
-
-        labelStatusMesa.setForeground(new java.awt.Color(255, 255, 255));
-        labelStatusMesa.setText("Status Mesa");
-
-        Tb01.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Mesa", "Status", "Funcionario", "Pedido"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        Tb01.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButton1.setText("Imprimir");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Tb01MouseClicked(evt);
+                jButton1MouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(Tb01);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        TabelaPedidos.setEditable(false);
+        TabelaPedidos.setColumns(20);
+        TabelaPedidos.setRows(5);
+        TabelaPedidos.setFocusable(false);
+        TabelaPedidos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabelaPedidosMouseClicked(evt);
+            }
+        });
+        jScrollPane6.setViewportView(TabelaPedidos);
 
         botaoSalvar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         botaoSalvar.setText("Salvar");
@@ -163,19 +145,93 @@ public class telaMesa extends javax.swing.JFrame {
             }
         });
 
+        labelStatusMesa.setForeground(new java.awt.Color(255, 255, 255));
+        labelStatusMesa.setText("Status Mesa");
+
         CampoFunc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Robo 1", "Robo 2", "Ze" }));
         CampoFunc.setSelectedIndex(-1);
+        CampoFunc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CampoFuncMouseClicked(evt);
+            }
+        });
+        CampoFunc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CampoFuncActionPerformed(evt);
+            }
+        });
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Funcionario");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Mesa");
+        statusMesa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ocupada", "Livre", "A Pagar" }));
+        statusMesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                statusMesaActionPerformed(evt);
+            }
+        });
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Cardápio");
+        ComboMesa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mesa 1", "Mesa 2", "Mesa 3", "Mesa 4", "Mesa 5" }));
+        ComboMesa.setSelectedIndex(-1);
+        ComboMesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboMesaActionPerformed(evt);
+            }
+        });
+
+        CampoID.setEditable(false);
+        CampoID.setBackground(new java.awt.Color(153, 153, 153));
+        CampoID.setForeground(new java.awt.Color(255, 255, 255));
+        CampoID.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        CampoID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CampoIDActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Mesa");
+
+        labelIdMesa.setForeground(new java.awt.Color(255, 255, 255));
+        labelIdMesa.setText("Id Mesa");
+
+        jLabel3.setFont(new java.awt.Font("Candara Light", 1, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("MESA");
+
+        Tb01.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Mesa", "Status", "Funcionario", "Pedido"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        Tb01.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Tb01MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(Tb01);
+        if (Tb01.getColumnModel().getColumnCount() > 0) {
+            Tb01.getColumnModel().getColumn(0).setResizable(false);
+            Tb01.getColumnModel().getColumn(0).setPreferredWidth(1);
+            Tb01.getColumnModel().getColumn(1).setResizable(false);
+            Tb01.getColumnModel().getColumn(1).setPreferredWidth(20);
+            Tb01.getColumnModel().getColumn(2).setResizable(false);
+            Tb01.getColumnModel().getColumn(2).setPreferredWidth(20);
+            Tb01.getColumnModel().getColumn(3).setResizable(false);
+            Tb01.getColumnModel().getColumn(4).setResizable(false);
+            Tb01.getColumnModel().getColumn(4).setPreferredWidth(59);
+        }
 
         TabelaCardapio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -199,130 +255,141 @@ public class telaMesa extends javax.swing.JFrame {
             }
         });
         jScrollPane4.setViewportView(TabelaCardapio);
+        if (TabelaCardapio.getColumnModel().getColumnCount() > 0) {
+            TabelaCardapio.getColumnModel().getColumn(1).setResizable(false);
+            TabelaCardapio.getColumnModel().getColumn(1).setPreferredWidth(10);
+            TabelaCardapio.getColumnModel().getColumn(2).setResizable(false);
+            TabelaCardapio.getColumnModel().getColumn(2).setPreferredWidth(10);
+        }
 
-        TabelaPedidos.setEditable(false);
-        TabelaPedidos.setColumns(20);
-        TabelaPedidos.setRows(5);
-        TabelaPedidos.setFocusable(false);
-        TabelaPedidos.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel9.setFont(new java.awt.Font("Candara Light", 0, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Cardápio");
+
+        jLabel5.setFont(new java.awt.Font("Candara Light", 0, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Pedidos e mesas:");
+
+        jButton2.setText("Cancelar edição");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TabelaPedidosMouseClicked(evt);
+                jButton2MouseClicked(evt);
             }
         });
-        jScrollPane6.setViewportView(TabelaPedidos);
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Pedidos");
-
-        jButton1.setText("Imprimir");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(75, 75, 75))
+                            .addComponent(jScrollPane6)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(botaoSalvar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton2))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CampoID, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(labelIdMesa))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ComboMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel3)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(labelStatusMesa)
+                                .addGap(26, 26, 26)
+                                .addComponent(jLabel2))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(statusMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(8, 8, 8)
+                                .addComponent(CampoFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))))
+                .addGap(47, 47, 47))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, 0)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(labelIdMesa))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ComboMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CampoID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelStatusMesa)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(statusMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CampoFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(botaoSalvar)
+                            .addComponent(jButton2)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addGap(89, 89, 89))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(botaoSalvar)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jButton1))
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CampoID, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelIdMesa)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ComboMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelStatusMesa)
-                            .addComponent(statusMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(CampoFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(95, 95, 95))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(labelIdMesa)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(CampoID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel1)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(ComboMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(labelStatusMesa)
-                                    .addGap(5, 5, 5)
-                                    .addComponent(statusMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CampoFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(135, 135, 135)
-                                .addComponent(botaoSalvar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(42, 42, 42)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void CampoIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CampoIDActionPerformed
-
-    private void ComboMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboMesaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ComboMesaActionPerformed
     
     private void limparFunc(){
         CampoFunc.removeAllItems();
@@ -366,37 +433,7 @@ public class telaMesa extends javax.swing.JFrame {
 //        }
 //    }
     
-    
-    private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
-           
-       
-    }//GEN-LAST:event_botaoSalvarActionPerformed
-
-    private void statusMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusMesaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_statusMesaActionPerformed
-
-    private void botaoSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoSalvarMouseClicked
-        processarPedido();
-        salvarInformacoes();
-        reabreMesa();
-    }//GEN-LAST:event_botaoSalvarMouseClicked
-
-    private void Tb01MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tb01MouseClicked
-        if((Tb01.getSelectedRow() != -1) && (vInsUpdate == 0) && (evt.getClickCount() == 2)){
-           
-           CampoID.setText(Tb01.getValueAt(Tb01.getSelectedRow(),0).toString());
-           ComboMesa.setSelectedItem(Tb01.getValueAt(Tb01.getSelectedRow(),1).toString());
-           statusMesa.setSelectedItem(Tb01.getValueAt(Tb01.getSelectedRow(),2).toString()); 
-           CampoFunc.setSelectedItem(Tb01.getValueAt(Tb01.getSelectedRow(),3).toString());  
-           String pedidos = Tb01.getValueAt(Tb01.getSelectedRow(), 4).toString(); 
-           TabelaPedidos.setText(pedidos);
-           vInsUpdate = 1;
-           Tb01.enable(false);
-           botaoSalvar.setText("Alterar");
-        }
-    }//GEN-LAST:event_Tb01MouseClicked
-    
+        
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         FuncionarioDao DaoFunc = new FuncionarioDao();
         atualizarFuncionario(DaoFunc);
@@ -433,16 +470,93 @@ public class telaMesa extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void TabelaCardapioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TabelaCardapioFocusLost
-        
+
     }//GEN-LAST:event_TabelaCardapioFocusLost
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        imprimirNota();
-    }//GEN-LAST:event_jButton1MouseClicked
+    private void Tb01MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tb01MouseClicked
+    if ((Tb01.getSelectedRow() != -1) && (vInsUpdate == 0) && (evt.getClickCount() == 2)) {
+
+        // Preenche os campos com os valores da linha selecionada
+        CampoID.setText(Tb01.getValueAt(Tb01.getSelectedRow(), 0).toString());
+        ComboMesa.setSelectedItem(Tb01.getValueAt(Tb01.getSelectedRow(), 1).toString());
+        statusMesa.setSelectedItem(Tb01.getValueAt(Tb01.getSelectedRow(), 2).toString());
+        CampoFunc.setSelectedItem(Tb01.getValueAt(Tb01.getSelectedRow(), 3).toString());
+        String pedidos = Tb01.getValueAt(Tb01.getSelectedRow(), 4).toString();
+        TabelaPedidos.setText(pedidos);
+
+        // Altera o estado para edição
+        vInsUpdate = 1;
+        botaoSalvar.setText("Alterar");
+    }
+    }//GEN-LAST:event_Tb01MouseClicked
+
+    private void CampoIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CampoIDActionPerformed
+
+    private void ComboMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboMesaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboMesaActionPerformed
+
+    private void statusMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusMesaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_statusMesaActionPerformed
+
+    private void CampoFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoFuncActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CampoFuncActionPerformed
+
+    private void CampoFuncMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CampoFuncMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CampoFuncMouseClicked
+
+    private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
+
+    }//GEN-LAST:event_botaoSalvarActionPerformed
+    private void finalizarEdicao() {
+        // Restaura os estados iniciais para permitir novas interações
+        Tb01.setEnabled(true); // Reativa a tabela
+        vInsUpdate = 0; // Sai do modo de edição
+        botaoSalvar.setText("Salvar"); // Restaura o texto do botão
+        limparCampos(); // Limpa os campos
+}
+    private void botaoSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoSalvarMouseClicked
+        processarPedido();
+        salvarInformacoes();
+    if (vInsUpdate == 1) {
+            // Lógica para atualizar os dados da tabela (modo de edição)
+            // Atualize os dados no banco de dados ou no modelo da tabela
+            JOptionPane.showMessageDialog(null, "Alteração realizada com sucesso!");
+
+            // Finaliza o modo de edição
+            finalizarEdicao();
+        } else {
+            // Lógica para adicionar novos dados à tabela
+            JOptionPane.showMessageDialog(null, "Novo item adicionado com sucesso!");
+        }
+    }//GEN-LAST:event_botaoSalvarMouseClicked
 
     private void TabelaPedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaPedidosMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_TabelaPedidosMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        imprimirNota();
+        Tb01.setEnabled(true); // Reativa a tabela
+
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        finalizarEdicao();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2MouseClicked
 
 private void salvarInformacoes() {
    if (ComboMesa.getSelectedItem() == null || statusMesa.getSelectedItem() == null || CampoFunc.getSelectedItem() == null) {
@@ -660,8 +774,9 @@ private void salvarInformacoes() {
                 HashPrintRequestAttributeSet set = new HashPrintRequestAttributeSet();
                 set.add(OrientationRequested.LANDSCAPE);
                 TabelaPedidos.print(header, footer);
-                JOptionPane.showMessageDialog(null, "\n" + "Nota Fiscal imprimido no caixa");
+                JOptionPane.showMessageDialog(null, "\n" + "Nota Fiscal imprimida no caixa");
                 fecharMesa();
+                limparCampos();
         }catch (java.awt.print.PrinterException e){
                 JOptionPane.showMessageDialog(null, "\n"+"Falha na impressão" + "\n" + e);
 
@@ -674,10 +789,11 @@ private void salvarInformacoes() {
          if(Tb01.getSelectedRow() != -1){
                     int ID = Integer.parseInt(CampoID.getText());
                     DefaultTableModel tabelacadastro = (DefaultTableModel) Tb01.getModel();
-                    tabelacadastro.removeRow((Tb01.getSelectedRow()));  
                     
                     MesaDao deleteitem = new MesaDao();
                     deleteitem.excluirID(ID);  
+                    tabelacadastro.removeRow((Tb01.getSelectedRow()));  
+
                     limparCampos();
                 
         }else{
@@ -693,6 +809,28 @@ private void salvarInformacoes() {
             
             
     }       
+    
+            private void tHeader(){
+    
+        JTableHeader thead = TabelaCardapio.getTableHeader();
+        thead.setOpaque(true);
+        thead.setBorder(BorderFactory.createLineBorder(Color.black));
+
+        thead.setBackground(new Color(228, 217, 255));
+        thead.setForeground(Color.black);
+        
+        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+        headerRenderer.setOpaque(false);
+        headerRenderer.setForeground(Color.BLACK);
+
+        headerRenderer.setBackground(new Color(204,102,255));
+
+        headerRenderer.setBorder(BorderFactory.createLineBorder(Color.black));
+
+        for (int i = 0; i < TabelaCardapio.getModel().getColumnCount(); i++) {
+    TabelaCardapio.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+}
+         }
     /**
      * @param args the command line arguments
      */
@@ -741,11 +879,14 @@ private void salvarInformacoes() {
     private javax.swing.JTable Tb01;
     private javax.swing.JButton botaoSalvar;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;

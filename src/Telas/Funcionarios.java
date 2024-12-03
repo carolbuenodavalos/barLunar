@@ -63,9 +63,9 @@ public class Funcionarios extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Candara Light", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Funcionarios");
+        jLabel1.setText("FUNCIONÁRIOS");
 
         CampoNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,7 +75,7 @@ public class Funcionarios extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Nome do Funcionario");
+        jLabel3.setText("Nome do Funcionário");
 
         butaoSalvar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         butaoSalvar.setText("Salvar");
@@ -98,7 +98,7 @@ public class Funcionarios extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Funcionarios"
+                "ID", "Funcionários"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -134,43 +134,42 @@ public class Funcionarios extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(butaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TabelaFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(CampoID, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(CampoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
-                .addComponent(PainelPizzaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                            .addComponent(CampoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(butaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TabelaFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(PainelPizzaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PainelPizzaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
+                    .addComponent(PainelPizzaFuncionario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CampoID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(10, 10, 10)
-                                .addComponent(CampoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CampoID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CampoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(16, 16, 16)
                         .addComponent(butaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(TabelaFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                        .addComponent(TabelaFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         pack();
@@ -185,45 +184,38 @@ public class Funcionarios extends javax.swing.JFrame {
     }//GEN-LAST:event_butaoSalvarActionPerformed
 
     private void butaoSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_butaoSalvarMouseClicked
-        if(((CampoNome.getText().trim().isEmpty()))){
-                   JOptionPane.showMessageDialog(null, "Nenhum dado idendificado");
-                   CampoNome.requestFocus();
-       }else{
-            if (contador == 0) {            
-                try{    
-                  modeloFuncionario cadastroP = new modeloFuncionario();
+        if (CampoNome.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nenhum dado identificado");
+            CampoNome.requestFocus();
+        } else {
+            if (contador == 0) {
+                try {
+                    modeloFuncionario cadastroP = new modeloFuncionario();
+                    cadastroP.setNomeFunc(CampoNome.getText());
 
-                  
-                  cadastroP.setNomeFunc(CampoNome.getText());   
-   
-                  FuncionarioDao cadastroPDao = new FuncionarioDao();
-                  cadastroPDao.inserir(cadastroP);
-                  atualizarFuncionario(cadastroPDao);
-                  limparCampos();
-                  JOptionPane.showMessageDialog(null, "Cadastro de Funcionario feito com sucesso!", "", INFORMATION_MESSAGE);
+                    FuncionarioDao cadastroPDao = new FuncionarioDao();
+                    cadastroPDao.inserir(cadastroP);
+                    atualizarFuncionario(cadastroPDao);
+                    limparCampos();
+                    JOptionPane.showMessageDialog(null, "Cadastro de Funcionário feito com sucesso!", "", INFORMATION_MESSAGE);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado:\n" + ex.getMessage(), "ERRO!", ERROR_MESSAGE);
                 }
-                catch(Exception ex){
-                    JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado na linha 176:\n" + ex.getMessage(), "ERRO!", ERROR_MESSAGE);
-                } 
-            }else{
+            } else {
+                // Atualizar o registro
                 modeloFuncionario cadastroP = new modeloFuncionario();
-               
-                cadastroP.setNomeFunc(CampoNome.getText());  
                 cadastroP.setIdFunc(Integer.parseInt(CampoID.getText()));
+                cadastroP.setNomeFunc(CampoNome.getText());
 
                 FuncionarioDao cadastroPDao = new FuncionarioDao();
-                atualizarFuncionario(cadastroPDao);
-                JOptionPane.showMessageDialog(null, "Cadastro de Funcionario alterado com sucesso!", "", INFORMATION_MESSAGE);
                 cadastroPDao.alterar(cadastroP);
-                CampoNome.requestFocus();
+                atualizarFuncionario(cadastroPDao);
                 limparCampos();
-                
-                contador = 0;
+                JOptionPane.showMessageDialog(null, "Cadastro de Funcionário alterado com sucesso!", "", INFORMATION_MESSAGE);
 
-                          
-            }    
-
-       }
+                finalizarEdicao(); // Finaliza o modo de edição
+            }
+        }
     }//GEN-LAST:event_butaoSalvarMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -235,13 +227,15 @@ public class Funcionarios extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void TabelaNomeFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaNomeFuncionarioMouseClicked
-         if((TabelaNomeFuncionario.getSelectedRow() != -1) && (contador == 0) && (evt.getClickCount() == 2)){
-           CampoID.setText(TabelaNomeFuncionario.getValueAt(TabelaNomeFuncionario.getSelectedRow(),0).toString());
-           CampoNome.setText(TabelaNomeFuncionario.getValueAt(TabelaNomeFuncionario.getSelectedRow(),1).toString());
-           contador = 1;
-           TabelaNomeFuncionario.enable(false);
-           butaoSalvar.setText("Alterar");
-        }   
+    if ((TabelaNomeFuncionario.getSelectedRow() != -1) && (evt.getClickCount() == 2)) {
+          // Preenche os campos com os valores da linha selecionada
+          CampoID.setText(TabelaNomeFuncionario.getValueAt(TabelaNomeFuncionario.getSelectedRow(), 0).toString());
+          CampoNome.setText(TabelaNomeFuncionario.getValueAt(TabelaNomeFuncionario.getSelectedRow(), 1).toString());
+
+          // Entra no modo de edição
+          contador = 1;
+          butaoSalvar.setText("Alterar");
+      }  
     }//GEN-LAST:event_TabelaNomeFuncionarioMouseClicked
     
     void atualizarFuncionario(FuncionarioDao DaoFunc){
@@ -261,6 +255,14 @@ public class Funcionarios extends javax.swing.JFrame {
                     }
                 
     }
+    
+    private void finalizarEdicao() {
+    contador = 0; // Sai do modo de edição
+    TabelaNomeFuncionario.setEnabled(true); // Reativa a tabela
+    butaoSalvar.setText("Salvar"); // Altera o texto do botão para "Salvar"
+    limparCampos(); // Limpa os campos
+}
+
     
     private void limparTabela(){
         //percorre a tabela e exclui todas as linhas
