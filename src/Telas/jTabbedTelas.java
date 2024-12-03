@@ -57,7 +57,7 @@ public class jTabbedTelas extends javax.swing.JFrame {
                 case 2 -> {
                     System.out.println("Carregando Funcionários...");
                     if (telaFuncionarios != null) {
-                        telaFuncionarios.atualizaDashFuncionario(new dao.MesaDao());
+                        telaFuncionarios.atualizaDashFuncionario(new dao.FuncionarioDao());
                         telaFuncionarios.atualizarFuncionario(new dao.FuncionarioDao());
                     }
                 }

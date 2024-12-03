@@ -11,14 +11,24 @@ package models;
 public class modeloFuncionario {
     private int idFuncionario;
     private String nomeFuncionario;
+    private int ativo;
     
     
     public modeloFuncionario(){
     }
     
-    public modeloFuncionario (int idFuncionario, String nomeFuncionario){
+    public modeloFuncionario (int idFuncionario, String nomeFuncionario, int ativo){
         this.idFuncionario = idFuncionario;
         this.nomeFuncionario = nomeFuncionario;
+        this.ativo = ativo;
+    }
+
+    public int getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(int ativo) {
+        this.ativo = ativo;
     }
     
     

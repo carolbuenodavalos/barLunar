@@ -13,7 +13,6 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.table.DefaultTableModel;
 import models.modeloFuncionario;
-import models.modeloMesa;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -97,11 +96,11 @@ public class Funcionarios extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Funcionários"
+                "ID", "Funcionários", "Ativo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -117,6 +116,7 @@ public class Funcionarios extends javax.swing.JFrame {
         if (TabelaNomeFuncionario.getColumnModel().getColumnCount() > 0) {
             TabelaNomeFuncionario.getColumnModel().getColumn(0).setResizable(false);
             TabelaNomeFuncionario.getColumnModel().getColumn(1).setResizable(false);
+            TabelaNomeFuncionario.getColumnModel().getColumn(2).setResizable(false);
         }
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -217,7 +217,7 @@ public class Funcionarios extends javax.swing.JFrame {
     }//GEN-LAST:event_butaoSalvarMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-         MesaDao mesaDao = new MesaDao();
+         FuncionarioDao mesaDao = new FuncionarioDao();
          atualizaDashFuncionario(mesaDao);
          
          FuncionarioDao DaoFunc = new FuncionarioDao();
@@ -243,7 +243,7 @@ public class Funcionarios extends javax.swing.JFrame {
                     DefaultTableModel modeloTabela = (DefaultTableModel) TabelaNomeFuncionario.getModel();
 
                     for(modeloFuncionario cadastroP : listaCadastros){
-                        modeloTabela.addRow(new String[]{ Integer.toString(cadastroP.getIdFunc()), cadastroP.getNomeFunc() });
+                        modeloTabela.addRow(new String[]{ Integer.toString(cadastroP.getIdFunc()), cadastroP.getNomeFunc(), Integer.toString(cadastroP.getAtivo()) });
                     }
                     
                     }catch(Exception ex){
@@ -267,19 +267,21 @@ public class Funcionarios extends javax.swing.JFrame {
         }
     }
     
-    void atualizaDashFuncionario(MesaDao cadastroDao) {
+    void atualizaDashFuncionario(FuncionarioDao cadastroDao) {
     new Thread() {
         @Override public void run() {
             while (true) {
                 try {
-                    ArrayList<modeloMesa> listaCadastros;
+                    ArrayList<modeloFuncionario> listaCadastros;
                     listaCadastros = cadastroDao.dashboard();
                     
                     DefaultCategoryDataset barChartData = new DefaultCategoryDataset();
                     DefaultPieDataset pizzaChartData = new DefaultPieDataset();
                     
-                    for (modeloMesa cadastro : listaCadastros) {
-                        pizzaChartData.setValue(cadastro.getFuncionario(), cadastro.getNumFunc());
+                    for (modeloFuncionario cadastro : listaCadastros) {
+                        if(cadastro.getAtivo() > 0){
+                        pizzaChartData.setValue(cadastro.getNomeFunc(), cadastro.getAtivo());
+                        }
                     }
 
                     JFreeChart pizzaChart = ChartFactory.createPieChart("Funcionarios mais ativos", pizzaChartData);

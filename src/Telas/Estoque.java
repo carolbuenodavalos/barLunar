@@ -143,7 +143,7 @@ public class Estoque extends javax.swing.JFrame {
         butaoCadastrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         butaoCadastrar.setForeground(new java.awt.Color(0, 0, 0));
         butaoCadastrar.setText("Cadastrar");
-        butaoCadastrar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 255, 255), 5, true));
+        butaoCadastrar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 5, true));
         butaoCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 butaoCadastrarMouseClicked(evt);
@@ -339,6 +339,7 @@ public class Estoque extends javax.swing.JFrame {
     }//GEN-LAST:event_CampoDescActionPerformed
 
     private void TabelaEstoqueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaEstoqueMouseClicked
+        //ira pegar o item da tabela selecionada e colocar nos campos
         if ((TabelaEstoque.getSelectedRow() != -1) && (evt.getClickCount() == 2)) {
             CampoID.setText(TabelaEstoque.getValueAt(TabelaEstoque.getSelectedRow(), 0).toString());
             CampoNome.setText(TabelaEstoque.getValueAt(TabelaEstoque.getSelectedRow(), 1).toString());
@@ -352,12 +353,14 @@ public class Estoque extends javax.swing.JFrame {
     }//GEN-LAST:event_TabelaEstoqueMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        //ao abrir, ira atualizar o estoque
         EstoqueDao estoqueAtt = new EstoqueDao();
         atualizaTabela(estoqueAtt);
     }//GEN-LAST:event_formWindowOpened
 
     private void butaoExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_butaoExcluirMouseClicked
-            if (TabelaEstoque.getSelectedRow() != -1) {
+         //excluir estoque atual
+        if (TabelaEstoque.getSelectedRow() != -1) {
            int msgRetorno = JOptionPane.showConfirmDialog(null, 
                                      "Confirme para remover o cadastro", 
                                      "Confirmação", 
@@ -378,7 +381,7 @@ public class Estoque extends javax.swing.JFrame {
     }//GEN-LAST:event_butaoExcluirMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+    //imprimir estoque
     MessageFormat header = new MessageFormat("Estoque Atual");
     MessageFormat footer = new MessageFormat("Bar Lunar");
     try{

@@ -67,7 +67,7 @@ public class FuncionarioDao implements DaoGenerica<modeloFuncionario>{
 
     public ArrayList<modeloFuncionario> consultar() {
          ArrayList<modeloFuncionario> comboboxfuncionario = new ArrayList<modeloFuncionario>();
-        String sql = "SELECT idFuncionario, nomeFuncionario FROM Funcionario ORDER BY nomeFuncionario";
+        String sql = "SELECT idFuncionario, nomeFuncionario, ativo FROM Funcionario ORDER BY nomeFuncionario";
         
         try
         {
@@ -82,6 +82,7 @@ public class FuncionarioDao implements DaoGenerica<modeloFuncionario>{
                     modeloFuncionario funclist = new modeloFuncionario();
                     funclist.setIdFunc(resultadoSentenca.getInt("idFuncionario"));
                     funclist.setNomeFunc(resultadoSentenca.getString("nomeFuncionario"));
+                    funclist.setAtivo(resultadoSentenca.getInt("ativo"));
 
                     comboboxfuncionario.add(funclist);
                 }
@@ -102,38 +103,72 @@ public class FuncionarioDao implements DaoGenerica<modeloFuncionario>{
      *
      * @return
      */
-    public ArrayList<modeloMesa> dashboard() {
-        
-        ArrayList<modeloMesa> ListarDashBoard = new ArrayList<modeloMesa>();
-        String sql = "select count(id) as funcionario, count(id)*2 as sumcad from Mesa";
-        
-        try
-        {
-            if(this.conexao.conectar())
-            {
-                PreparedStatement sentenca = this.conexao.getConnection().prepareStatement(sql);
+    public ArrayList<modeloFuncionario> dashboard() {
+    ArrayList<modeloFuncionario> ListarDashBoard = new ArrayList<modeloFuncionario>();
+    String sql = "SELECT idFuncionario, nomeFuncionario, ativo FROM Funcionario";
 
-                 ResultSet resultadoSentenca = sentenca.executeQuery();
+    try {
+        if (this.conexao.conectar()) {
+            PreparedStatement sentenca = this.conexao.getConnection().prepareStatement(sql);
 
-                while(resultadoSentenca.next()) 
-                {
-                    modeloMesa cadastro = new modeloMesa();
-                    cadastro.setFuncionario(resultadoSentenca.getString("numcad"));
-                    
-                    ListarDashBoard.add(cadastro);
-                }
+            ResultSet resultadoSentenca = sentenca.executeQuery();
 
-                sentenca.close();
-                this.conexao.getConnection().close();
+            while (resultadoSentenca.next()) {
+                modeloFuncionario cadastro = new modeloFuncionario();
+                cadastro.setNomeFunc(resultadoSentenca.getString("nomeFuncionario"));
+                cadastro.setAtivo(resultadoSentenca.getInt("ativo"));
+                
+                System.out.println("Funcionario: " + cadastro.getNomeFunc() + ", Numero de vezes ativo: " + cadastro.getAtivo());
+
+                ListarDashBoard.add(cadastro);
             }
-            
-            return ListarDashBoard;
+
+            sentenca.close();
+            this.conexao.getConnection().close();
         }
-        catch(SQLException ex)
-        {
-           throw new RuntimeException(ex);
-        }
+        
+        return ListarDashBoard;
+    } catch (SQLException ex) {
+        throw new RuntimeException(ex);
     }
+}
+
+    public void incrementarAtivo(String idFuncionario) {
+    String sql = "UPDATE Funcionario SET ativo = ativo + 1 WHERE idFuncionario = ?";
+
+    try {
+        if (this.conexao.conectar()) {
+            PreparedStatement stmt = this.conexao.getConnection().prepareStatement(sql);
+            stmt.setString(1, idFuncionario);
+            stmt.executeUpdate();
+            stmt.close();
+            this.conexao.getConnection().close();
+        }
+    } catch (SQLException ex) {
+        throw new RuntimeException(ex);
+    }
+}
+
+    public String obterIdFuncionarioPorNome(String nomeFuncionario) {
+    String sql = "SELECT idFuncionario FROM Funcionario WHERE nomeFuncionario = ?";
+    
+    try {
+        if (this.conexao.conectar()) {
+            PreparedStatement stmt = this.conexao.getConnection().prepareStatement(sql);
+            stmt.setString(1, nomeFuncionario);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString("idFuncionario");
+            }
+            stmt.close();
+            this.conexao.getConnection().close();
+        }
+    } catch (SQLException ex) {
+        throw new RuntimeException(ex);
+    }
+    return null;
+}
+
     
      public void alterar(modeloFuncionario cadastro) {
         String sql = "UPDATE Funcionario SET nomeFuncionario = ? WHERE idFuncionario = ?";

@@ -137,7 +137,7 @@ public class MesaDao implements DaoGenerica<modeloMesa> {
         }
     }
      
-     
+  //inutilizado e movido pro funcionariodao, mas nn quero excluir
   public String obterFuncionarioMaisAtivo() {
     String sql = "SELECT funcionario, COUNT(*) AS total FROM Mesa " +
                  "GROUP BY funcionario " +
@@ -162,7 +162,7 @@ public class MesaDao implements DaoGenerica<modeloMesa> {
      
      
      
-
+    //inutilizado e movido pro funcionariodao, mas nn quero excluir
     public ArrayList<modeloMesa> dashboard() {
     ArrayList<modeloMesa> ListarDashBoard = new ArrayList<modeloMesa>();
     String sql = "SELECT funcionario, COUNT(funcionario) AS numcad FROM Mesa GROUP BY funcionario;";

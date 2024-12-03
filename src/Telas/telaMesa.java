@@ -722,22 +722,32 @@ private void salvarInformacoes() {
         }   
     }
     
-    private void fecharMesa(){
-         if(Tb01.getSelectedRow() != -1){
-                    int ID = Integer.parseInt(CampoID.getText());
-                    DefaultTableModel tabelacadastro = (DefaultTableModel) Tb01.getModel();
-                    
-                    MesaDao deleteitem = new MesaDao();
-                    deleteitem.excluirID(ID);  
-                    tabelacadastro.removeRow((Tb01.getSelectedRow()));  
-                    
-                    limparCampos();
-                    TabelaPedidos.setText("");
-                
-        }else{
-            JOptionPane.showMessageDialog(null, "Selecione um Cadastro para excluir!");
+   private void fecharMesa() {
+    if (Tb01.getSelectedRow() != -1) {
+        int ID = Integer.parseInt(CampoID.getText());
+        DefaultTableModel tabelacadastro = (DefaultTableModel) Tb01.getModel(); 
+        FuncionarioDao closethis = new FuncionarioDao();   
+        String nomeFuncionario = (String) tabelacadastro.getValueAt(Tb01.getSelectedRow(), 3);
+        String idFuncionario = closethis.obterIdFuncionarioPorNome(nomeFuncionario);
+        
+        
+        
+        MesaDao deleteitem = new MesaDao();
+        deleteitem.excluirID(ID);  
+        tabelacadastro.removeRow((Tb01.getSelectedRow()));  
+        
+        if (idFuncionario != null) {
+            closethis.incrementarAtivo(idFuncionario);
         }
+        
+        limparCampos();
+        TabelaPedidos.setText("");
+        botaoSalvar.setText("Salvar");   
+    } else {
+        JOptionPane.showMessageDialog(null, "Selecione um Cadastro para excluir!");
     }
+}
+
     
     private void reabreMesa() {
     

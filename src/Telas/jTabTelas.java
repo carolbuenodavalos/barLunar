@@ -59,7 +59,7 @@ private void configurarListeners() {
             case 1 -> { // Aba Estoque
                 System.out.println("Carregando Funcionários...");
                 if (telaFuncionarios != null) {
-                    telaFuncionarios.atualizaDashFuncionario(new dao.MesaDao());
+                    telaFuncionarios.atualizaDashFuncionario(new dao.FuncionarioDao());
                     telaFuncionarios.atualizarFuncionario(new dao.FuncionarioDao());
                 }
             }
