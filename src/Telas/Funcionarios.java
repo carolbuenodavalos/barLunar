@@ -209,7 +209,7 @@ public class Funcionarios extends javax.swing.JFrame {
                 cadastroPDao.alterar(cadastroP);
                 atualizarFuncionario(cadastroPDao);
                 limparCampos();
-                JOptionPane.showMessageDialog(null, "Cadastro de Funcionário alterado com sucesso!", "", INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Funcionário alterado com sucesso!", "", INFORMATION_MESSAGE);
 
                 finalizarEdicao(); 
             }

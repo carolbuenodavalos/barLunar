@@ -129,7 +129,7 @@ private void carregarTelas() {
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Candara Light", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Olá! bem vindo ao sistema");
+        jLabel3.setText("Olá! bem vinda ao sistema");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/Bar_Lunar__3_-removebg-preview.png"))); // NOI18N
 

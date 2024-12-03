@@ -518,9 +518,13 @@ public class telaMesa extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        if (ComboMesa.getSelectedItem() == null || statusMesa.getSelectedItem() == null || CampoFunc.getSelectedItem() == null) {
+                   JOptionPane.showMessageDialog(null, "Nenhum dado idendificado");
+                   ComboMesa.requestFocus();
+       }else{
         imprimirNota();
         Tb01.setEnabled(true);
-
+        }
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -551,7 +555,7 @@ private void salvarInformacoes() {
     MesaDao cadastroPDao = new MesaDao();
     cadastroPDao.inserir(cadastroP); 
     limparTabela();
-    JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso!", "", INFORMATION_MESSAGE);
+    JOptionPane.showMessageDialog(null, "Pedido feito com sucesso!", "", INFORMATION_MESSAGE);
 
     TabelaPedidos.setText("");
     EstoqueDao estoqueAtt = new EstoqueDao();
@@ -580,7 +584,7 @@ private void salvarInformacoes() {
     MesaDao cadastroPDao = new MesaDao();
     cadastroPDao.alterar(cadastroP); 
     limparTabela();
-    JOptionPane.showMessageDialog(null, "Alteração feita com sucesso!", "", INFORMATION_MESSAGE);
+    JOptionPane.showMessageDialog(null, "Alteração do pedido feito com sucesso!", "", INFORMATION_MESSAGE);
 
     TabelaPedidos.setText("");
     EstoqueDao estoqueAtt = new EstoqueDao();
@@ -713,7 +717,6 @@ private void salvarInformacoes() {
                 TabelaPedidos.print(header, footer);
                 JOptionPane.showMessageDialog(null, "\n" + "Nota Fiscal imprimida no caixa");
                 fecharMesa();
-                limparCampos();
         }catch (java.awt.print.PrinterException e){
                 JOptionPane.showMessageDialog(null, "\n"+"Falha na impressão" + "\n" + e);
 
